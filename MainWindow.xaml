@@ -5,20 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MQTT"
         mc:Ignorable="d"
-        Title="MQTTclient" Height="457" Width="661">
-    <Grid>
-        <Button x:Name="connect" Content="連接及傳送" Margin="45,324,45,0" Click="Button_Click" Height="54" FontSize="22" VerticalAlignment="Top"/>
-        <TextBox x:Name="ip" HorizontalAlignment="Left" Margin="82,57,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="161" Height="33" FontSize="22"/>
-        <Label Content="IP:" HorizontalAlignment="Left" Margin="45,55,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <TextBox x:Name="port" HorizontalAlignment="Left" Margin="278,57,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="65" Height="32" FontSize="22"/>
-        <Label Content="埠:" HorizontalAlignment="Left" Margin="242,55,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <TextBox x:Name="ClientID" Margin="450,57,45,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" FontSize="22" Text=""/>
-        <Label Content="ClientID:" HorizontalAlignment="Left" Margin="348,55,0,0" VerticalAlignment="Top" FontSize="22" Width="97"/>
-        <TextBox x:Name="msg" Margin="45,167,45,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="146" FontSize="22"/>
-        <Label Content="要傳送的訊息:" HorizontalAlignment="Left" Margin="45,128,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <Label Content="MQTT client端" HorizontalAlignment="Left" Margin="45,17,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <Label Content="主題:" HorizontalAlignment="Left" Margin="45,96,0,0" VerticalAlignment="Top" FontSize="22" Width="57"/>
-        <TextBox x:Name="Topic" Margin="102,98,382,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22"/>
-
+        Title="MQTT" Height="457" Width="661">
+    <Grid Background="#EEB8B8">
+        <TabControl>
+            <TabItem Header="Client">
+                <Grid Background="#FFFF">
+                    <Button x:Name="connect" Content="連接及傳送" Margin="45,324,45,0" Click="Button_Click" Height="54" FontSize="22" VerticalAlignment="Top"/>
+                    <TextBox x:Name="ip" HorizontalAlignment="Left" Margin="82,57,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="161" Height="33" FontSize="22"/>
+                    <Label Content="IP:" HorizontalAlignment="Left" Margin="45,55,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="port" HorizontalAlignment="Left" Margin="278,57,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="65" Height="32" FontSize="22"/>
+                    <Label Content="埠:" HorizontalAlignment="Left" Margin="242,55,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="ClientID" Margin="450,57,45,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" FontSize="22" Text=""/>
+                    <Label Content="ClientID:" HorizontalAlignment="Left" Margin="348,55,0,0" VerticalAlignment="Top" FontSize="22" Width="97"/>
+                    <TextBox x:Name="msg" Margin="45,167,45,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="146" FontSize="22"/>
+                    <Label Content="要傳送的訊息:" HorizontalAlignment="Left" Margin="45,128,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <Label Content="MQTT client端" HorizontalAlignment="Left" Margin="45,17,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <Label Content="主題:" HorizontalAlignment="Left" Margin="45,96,0,0" VerticalAlignment="Top" FontSize="22" Width="57"/>
+                    <TextBox x:Name="Topic" Margin="102,98,382,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22"/>
+                    <Grid/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Subscriber">
+                <Grid Background="#FFFF"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
