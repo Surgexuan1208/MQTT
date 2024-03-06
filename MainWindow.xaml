@@ -26,7 +26,30 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Subscriber">
-                <Grid Background="#FFFF"/>
+                <Grid Background="#FFFF">
+                    <Label Content="IP:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="ip2" HorizontalAlignment="Left" Margin="54,57,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="161" Height="33" FontSize="22"/>
+                    <TextBox x:Name="port2" HorizontalAlignment="Left" Margin="54,94,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="65" Height="32" FontSize="22"/>
+                    <Label Content="埠:" HorizontalAlignment="Left" Margin="20,91,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="ClientID2" Margin="333,57,84,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" FontSize="22" Text=""/>
+                    <Label Content="ClientID:" HorizontalAlignment="Left" Margin="237,55,0,0" VerticalAlignment="Top" FontSize="22" Width="97"/>
+                    <Button Content="start" HorizontalAlignment="Left" Margin="30,340,0,0" VerticalAlignment="Top" Click="StartButton_Click" RenderTransformOrigin="0.341,-0.695" Height="35" Width="285" FontSize="22"/>
+                    <TextBox x:Name="ReceivedMessagesTextBox" HorizontalAlignment="Left" Margin="31,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="574" Height="166" Background="#FFFFE1B5"/>
+                    <Button Content="stop" HorizontalAlignment="Left" Margin="321,339,0,0" VerticalAlignment="Top" Click="StopButton_Click" Width="285" Height="35" FontSize="22"/>
+                    <Label Content="接收到的的訊息:" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Content="MQTT Subscriber端" HorizontalAlignment="Left" Margin="22,17,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Content="主題:" HorizontalAlignment="Left" Margin="237,90,0,0" VerticalAlignment="Top" FontSize="22" Width="57" RenderTransformOrigin="-2.691,-2.46"/>
+                    <TextBox x:Name="Topic2" Margin="293,94,84,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5">
+                        <TextBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBox.RenderTransform>
+                    </TextBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
