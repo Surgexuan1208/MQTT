@@ -29,6 +29,7 @@ namespace MQTT
             InitializeComponent();
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        int state = 0;
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Topic.Text.Length <1 ||Topic.Text.Length==0)
@@ -92,6 +93,9 @@ namespace MQTT
                 // 連接到 MQTT 伺服器
                 var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: ClientID2.Text), cleanSession: true);
                 MessageBox.Show("已連接到 MQTT 伺服器！");
+                startbtn.IsEnabled = false;
+                stopbtn.IsEnabled = true;
+                ip2.IsEnabled = false; port2.IsEnabled = false; ClientID2.IsEnabled = false; Topic2.IsEnabled = false;
                 await client.SubscribeAsync(Topic2.Text, MqttQualityOfService.AtMostOnce); //QoS0
                 client.MessageStream.Subscribe(async msg =>
                 {
@@ -105,8 +109,21 @@ namespace MQTT
                         // 斷開 MQTT 連接
                         await client.DisconnectAsync();
                         MessageBox.Show("已斷開 MQTT 連接！");
+                        cancellationTokenSource = new CancellationTokenSource();
                     }
                 });
+                // 檢查是否取消訂閱
+                if (cancellationTokenSource.IsCancellationRequested)
+                {
+                    // 在 UI 線程上執行 UI 元素的操作
+                    await Dispatcher.InvokeAsync(async () =>
+                    {
+                        // 斷開 MQTT 連接
+                        await client.DisconnectAsync();
+                        cancellationTokenSource = new CancellationTokenSource();
+                    });
+                }
+                
             }
             catch (Exception ex)
             {
@@ -117,6 +134,24 @@ namespace MQTT
         private async void StopButton_Click(object sender, EventArgs e)
         {
             cancellationTokenSource.Cancel();
+            stopbtn.IsEnabled = false;
+            var configuration = new MqttConfiguration
+            {
+                BufferSize = 65536,
+                Port = int.Parse(port2.Text),
+                KeepAliveSecs = 10,
+                WaitTimeoutSecs = 2,
+                MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
+                AllowWildcardsInTopicFilters = true
+            };
+            // 建立 MQTT 客戶端
+            var client = await MqttClient.CreateAsync((string)ip2.Text, configuration);
+            // 連接到 MQTT 伺服器
+            var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "debugger"), cleanSession: true);
+            var message1 = new MqttApplicationMessage(Topic2.Text, Encoding.UTF8.GetBytes("Stop"));
+            await client.PublishAsync(message1, MqttQualityOfService.AtMostOnce); //QoS0
+            startbtn.IsEnabled = true;
+            ip2.IsEnabled = true; 
         }
     }
 }
