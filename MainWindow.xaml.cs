@@ -29,7 +29,6 @@ namespace MQTT
             InitializeComponent();
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        int state = 0;
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Topic.Text.Length <1 ||Topic.Text.Length==0)
@@ -151,7 +150,8 @@ namespace MQTT
             var message1 = new MqttApplicationMessage(Topic2.Text, Encoding.UTF8.GetBytes("Stop"));
             await client.PublishAsync(message1, MqttQualityOfService.AtMostOnce); //QoS0
             startbtn.IsEnabled = true;
-            ip2.IsEnabled = true; 
+            ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
+
         }
     }
 }
