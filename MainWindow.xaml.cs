@@ -16,6 +16,7 @@ using System.Net.Mqtt;
 using System.ServiceModel.Channels;
 using System.Net.Mqtt.Sdk;
 using System.Threading;
+using System.Reflection.PortableExecutable;
 
 namespace MQTT
 {
@@ -31,6 +32,7 @@ namespace MQTT
         }
         List<char> items = new List<char>();
         List<String> machines = new List<String>();
+        List<Machine> arr = new List<Machine>();
         private void Createlist()
         {
             for(int i = 0; i <= 26; i++){
@@ -40,8 +42,8 @@ namespace MQTT
             {
                 machines.Add("逼卡機 " + i.ToString() + "  (代號" + items[i-1] +"機)");
             }
-            comboBox.ItemsSource = machines;
-            comboBox.SelectedIndex = 0;
+            combobox.ItemsSource = machines;
+            combobox.SelectedIndex = 0;
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -159,7 +161,71 @@ namespace MQTT
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            if (ip3.Text.Length < 1 || port3.Text.Length < 1)
+            {
+                MessageBox.Show("格子內資料不能為空");
+                return;
+            }
+            arr.Add(new Machine(int.Parse(port3.Text), ip3.Text, items[combobox.SelectedIndex] + ""));
+            datagrid.ItemsSource = arr;
+            MessageBox.Show("建立成功");
+        }
+        private async void SubscribeToTopic(Machine m)
+        {
+            try
+            {
+                // 建立 MQTT 客戶端配置
+                var configuration = new MqttConfiguration
+                {
+                    BufferSize = 65536,
+                    Port = m.port,
+                    KeepAliveSecs = 10,
+                    WaitTimeoutSecs = 2,
+                    MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
+                    AllowWildcardsInTopicFilters = true
+                };
+                // 建立 MQTT 客戶端
+                var client = await MqttClient.CreateAsync((string)m.IP, configuration);
+                MessageBox.Show("已建立 MQTT 客戶端！");
+                // 連接到 MQTT 伺服器
+                var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "Foo"), cleanSession: true);
+                MessageBox.Show("已連接到 MQTT 伺服器！");
+                startbtn1.IsEnabled = false;
+                await client.SubscribeAsync(m.Topic, MqttQualityOfService.AtMostOnce); //QoS0
+                client.MessageStream.Subscribe(async msg =>
+                {
+                    // 將收到的消息顯示在 UI 中
+                    Dispatcher.Invoke(() =>
+                    {
+                        listener.AppendText($"收到來自主題 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n");
+                    });
+                    if (cancellationTokenSource.IsCancellationRequested)
+                    {
+                        // 斷開 MQTT 連接
+                        await client.DisconnectAsync();
+                        MessageBox.Show("已斷開 MQTT 連接！");
+                        cancellationTokenSource = new CancellationTokenSource();
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"錯誤：{ex.Message}");
+            }
+        }
+        private void startbtn1_Click(object sender, RoutedEventArgs e)
+        {
+            if(arr.Count == 0)
+            {
+                MessageBox.Show("無任何機台登記");
+                return;
+            }
+            startbtn1.IsEnabled = false;
+            MessageBox.Show("開始監聽");
+            for (int i = 0; i < arr.Count; i++)
+            {
+                SubscribeToTopic(arr[i]);
+            }
         }
     }
 }

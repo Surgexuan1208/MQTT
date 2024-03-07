@@ -9,31 +9,26 @@ namespace MQTT
 {
     internal class Machine
     {
-        private
-            MqttConfiguration configuration { get; set;}
-            String IP { get; set; }
-            int port { get; set; }
-            String ClientID { get; set; }
-            String Topic {get; set;}
+            private MqttConfiguration configuration { get; set;}
+            public String IP { get; set; }
+            public int port { get; set; }
+            private String ClientID { get; set; }
+            public String Topic {get; set;}
 
-        Machine(){
-            port = 1883;
-            IP = "10.0.0.1";
-            ClientID = "admin";
-            Topic = ""+(char)97;
-            configuration= new MqttConfiguration
-            {
-                BufferSize = 65536,
-                Port = port,
-                KeepAliveSecs = 10,
-                WaitTimeoutSecs = 2,
-                MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
-                AllowWildcardsInTopicFilters = true
-            };
-        }
-        
-        
-        
-        
+            public Machine(int p=1883,string i="10.0.0.1",string t="a"){
+                port = p;
+                IP = i;
+                ClientID = "admin";
+                Topic = t;
+                configuration= new MqttConfiguration
+                {
+                    BufferSize = 65536,
+                    Port = port,
+                    KeepAliveSecs = 10,
+                    WaitTimeoutSecs = 2,
+                    MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
+                    AllowWildcardsInTopicFilters = true
+                };
+            }
     }
 }
