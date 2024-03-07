@@ -27,6 +27,21 @@ namespace MQTT
         public MainWindow()
         {
             InitializeComponent();
+            Createlist();
+        }
+        List<char> items = new List<char>();
+        List<String> machines = new List<String>();
+        private void Createlist()
+        {
+            for(int i = 0; i <= 26; i++){
+                items.Add((char)(97 + i));
+            }
+            for (int i = 1; i <= 26; i++)
+            {
+                machines.Add("逼卡機 " + i.ToString() + "  (代號" + items[i-1] +"機)");
+            }
+            comboBox.ItemsSource = machines;
+            comboBox.SelectedIndex = 0;
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -111,18 +126,6 @@ namespace MQTT
                         cancellationTokenSource = new CancellationTokenSource();
                     }
                 });
-                // 檢查是否取消訂閱
-                if (cancellationTokenSource.IsCancellationRequested)
-                {
-                    // 在 UI 線程上執行 UI 元素的操作
-                    await Dispatcher.InvokeAsync(async () =>
-                    {
-                        // 斷開 MQTT 連接
-                        await client.DisconnectAsync();
-                        cancellationTokenSource = new CancellationTokenSource();
-                    });
-                }
-                
             }
             catch (Exception ex)
             {
@@ -151,6 +154,11 @@ namespace MQTT
             await client.PublishAsync(message1, MqttQualityOfService.AtMostOnce); //QoS0
             startbtn.IsEnabled = true;
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
     }
