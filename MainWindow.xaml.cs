@@ -186,10 +186,10 @@ namespace MQTT
                 };
                 // 建立 MQTT 客戶端
                 var client = await MqttClient.CreateAsync((string)m.IP, configuration);
-                MessageBox.Show("已建立 MQTT 客戶端！");
+                MessageBox.Show($"主機'{m.Topic}'已建立 MQTT 客戶端！");
                 // 連接到 MQTT 伺服器
                 var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "Foo"), cleanSession: true);
-                MessageBox.Show("已連接到 MQTT 伺服器！");
+                MessageBox.Show($"主機'{m.Topic}'已連接到 MQTT 伺服器！");
                 startbtn1.IsEnabled = false;
                 await client.SubscribeAsync(m.Topic, MqttQualityOfService.AtMostOnce); //QoS0
                 client.MessageStream.Subscribe(async msg =>
@@ -197,7 +197,7 @@ namespace MQTT
                     // 將收到的消息顯示在 UI 中
                     Dispatcher.Invoke(() =>
                     {
-                        listener.AppendText($"收到來自主題 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n");
+                        listener.AppendText($"收到來自主機 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n");
                     });
                     if (cancellationTokenSource.IsCancellationRequested)
                     {
@@ -222,10 +222,12 @@ namespace MQTT
             }
             startbtn1.IsEnabled = false;
             MessageBox.Show("開始監聽");
-            for (int i = 0; i < arr.Count; i++)
+            /*for (int i = 0; i < arr.Count; i++)
             {
                 SubscribeToTopic(arr[i]);
-            }
+            }*/
+            SubscribeToTopic(arr[0]);
+            SubscribeToTopic(arr[1]);
         }
     }
 }
