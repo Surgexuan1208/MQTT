@@ -222,12 +222,10 @@ namespace MQTT
             }
             startbtn1.IsEnabled = false;
             MessageBox.Show("開始監聽");
-            /*for (int i = 0; i < arr.Count; i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 SubscribeToTopic(arr[i]);
-            }*/
-            SubscribeToTopic(arr[0]);
-            SubscribeToTopic(arr[1]);
+            }
         }
     }
 }
