@@ -8,8 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="2.2.5" />
     <PackageReference Include="OpcLabs.Mqtt" Version="5.80.75" />
     <PackageReference Include="System.Net.Mqtt" Version="0.6.3-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\Downloads\MySql.Data_x86\MySql.Data.DLL</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

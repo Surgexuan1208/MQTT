@@ -17,6 +17,7 @@ using System.ServiceModel.Channels;
 using System.Net.Mqtt.Sdk;
 using System.Threading;
 using System.Reflection.PortableExecutable;
+using MySql.Data.MySqlClient;
 
 namespace MQTT
 {
@@ -215,16 +216,39 @@ namespace MQTT
         }
         private void startbtn1_Click(object sender, RoutedEventArgs e)
         {
-            if(arr.Count == 0)
+            /*if(arr.Count == 0)
             {
                 MessageBox.Show("無任何機台登記");
                 return;
-            }
-            startbtn1.IsEnabled = false;
-            MessageBox.Show("開始監聽");
-            for (int i = 0; i < arr.Count; i++)
-            {
-                SubscribeToTopic(arr[i]);
+            }*/
+            const string database = "company_db";
+            const string databaseServer = "220.132.141.9";
+            const string databasePort = "6833";
+            const string databaseUser = "root";
+            const string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            using (MySqlConnection connection = new MySqlConnection(connectionString)){
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                // 在這裡執行資料庫操作
+                string sql = "SELECT * FROM member_db";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string company_id = reader.GetString("Company_ID");
+                            string card_id = reader.GetString("Card_ID");
+                            string name = reader.GetString("Name");
+                            string addr = reader.GetString("Address");
+                            string phone = reader.GetString("Cellphone");
+                            string firstday = reader.GetString("First_Day");
+                            string birthday = reader.GetString("Birth_Day");
+                            listener.AppendText($"Company_ID: {company_id},Card_ID: {card_id}, Name: {name},Address: {addr},Cellphone: {phone},First_Day: {firstday},Birth_Day: {birthday}");
+                        }
+                    }
+                }                    
+                connection.Close(); //資料庫斷線
             }
         }
     }
