@@ -55,15 +55,15 @@
                     <Label Content="Machine Creater" HorizontalAlignment="Left" Margin="22,17,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Label Content="主題:" HorizontalAlignment="Left" Margin="20,136,0,0" VerticalAlignment="Top" FontSize="22" Width="57" RenderTransformOrigin="-2.691,-2.46"/>
                     <ComboBox x:Name="combobox" HorizontalAlignment="Left" Margin="81,142,0,0" VerticalAlignment="Top" Width="135" Height="29"/>
-                    <Button Content="建立" HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" Width="191" Height="36" FontSize="22" Click="Button_Click_1"/>
+                    <Button Content="建立" HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" Width="191" Height="36" FontSize="22"/>
                     <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="236,28,19,12"/> -->
                     <TextBox x:Name="listener" Margin="236,28,19,12" Background="#FFF1E8E8"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Listener">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="datagrid" Margin="236,28,19,12"/>
-                    <Button x:Name="startbtn1" Content="start" Margin="28,329,442,0" Click="startbtn1_Click" FontSize="22"  Height="35" VerticalAlignment="Top"/>
+                    <DataGrid x:Name="datagrid" Margin="28,28,28,91"/>
+                    <Button x:Name="startbtn1" Content="start" Margin="28,338,28,0" Click="startbtn1_Click" FontSize="22"  Height="38" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>

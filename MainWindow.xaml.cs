@@ -29,23 +29,8 @@ namespace MQTT
         public MainWindow()
         {
             InitializeComponent();
-            Createlist();
         }
-        List<char> items = new List<char>();
-        List<String> machines = new List<String>();
-        List<Machine> arr = new List<Machine>();
-        private void Createlist()
-        {
-            for(int i = 0; i <= 26; i++){
-                items.Add((char)(97 + i));
-            }
-            for (int i = 1; i <= 26; i++)
-            {
-                machines.Add("逼卡機 " + i.ToString() + "  (代號" + items[i-1] +"機)");
-            }
-            combobox.ItemsSource = machines;
-            combobox.SelectedIndex = 0;
-        }
+        List<Member> members = new List<Member>();
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -84,7 +69,6 @@ namespace MQTT
                 MessageBox.Show($"錯誤：{ex.Message}");
             }
         }
-
         private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (Topic2.Text.Length < 1 || Topic2.Text.Length == 0)
@@ -159,61 +143,6 @@ namespace MQTT
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
 
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (ip3.Text.Length < 1 || port3.Text.Length < 1)
-            {
-                MessageBox.Show("格子內資料不能為空");
-                return;
-            }
-            arr.Add(new Machine(int.Parse(port3.Text), ip3.Text, items[combobox.SelectedIndex] + ""));
-            datagrid.ItemsSource = arr;
-            MessageBox.Show("建立成功");
-        }
-        private async void SubscribeToTopic(Machine m)
-        {
-            try
-            {
-                // 建立 MQTT 客戶端配置
-                var configuration = new MqttConfiguration
-                {
-                    BufferSize = 65536,
-                    Port = m.port,
-                    KeepAliveSecs = 10,
-                    WaitTimeoutSecs = 2,
-                    MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
-                    AllowWildcardsInTopicFilters = true
-                };
-                // 建立 MQTT 客戶端
-                var client = await MqttClient.CreateAsync((string)m.IP, configuration);
-                MessageBox.Show($"主機'{m.Topic}'已建立 MQTT 客戶端！");
-                // 連接到 MQTT 伺服器
-                var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "Foo"), cleanSession: true);
-                MessageBox.Show($"主機'{m.Topic}'已連接到 MQTT 伺服器！");
-                startbtn1.IsEnabled = false;
-                await client.SubscribeAsync(m.Topic, MqttQualityOfService.AtMostOnce); //QoS0
-                client.MessageStream.Subscribe(async msg =>
-                {
-                    // 將收到的消息顯示在 UI 中
-                    Dispatcher.Invoke(() =>
-                    {
-                        listener.AppendText($"收到來自主機 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n");
-                    });
-                    if (cancellationTokenSource.IsCancellationRequested)
-                    {
-                        // 斷開 MQTT 連接
-                        await client.DisconnectAsync();
-                        MessageBox.Show("已斷開 MQTT 連接！");
-                        cancellationTokenSource = new CancellationTokenSource();
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"錯誤：{ex.Message}");
-            }
-        }
         private void startbtn1_Click(object sender, RoutedEventArgs e)
         {
             /*if(arr.Count == 0)
@@ -228,7 +157,9 @@ namespace MQTT
             const string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
             using (MySqlConnection connection = new MySqlConnection(connectionString)){
+                MessageBox.Show("正在連接資料庫");
                 connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                MessageBox.Show("已連接資料庫");
                 // 在這裡執行資料庫操作
                 string sql = "SELECT * FROM member_db";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -237,18 +168,13 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            string company_id = reader.GetString("Company_ID");
-                            string card_id = reader.GetString("Card_ID");
-                            string name = reader.GetString("Name");
-                            string addr = reader.GetString("Address");
-                            string phone = reader.GetString("Cellphone");
-                            string firstday = reader.GetString("First_Day");
-                            string birthday = reader.GetString("Birth_Day");
-                            listener.AppendText($"Company_ID: {company_id},Card_ID: {card_id}, Name: {name},Address: {addr},Cellphone: {phone},First_Day: {firstday},Birth_Day: {birthday}");
+                            members.Add(new Member(reader.GetString("Company_ID"),reader.GetString("Card_ID"),reader.GetString("Name"),reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("First_Day"), reader.GetString("Birth_Day")));
                         }
                     }
-                }                    
+                }
                 connection.Close(); //資料庫斷線
+                MessageBox.Show("資料傳送完成");
+                datagrid.ItemsSource=members;
             }
         }
     }
