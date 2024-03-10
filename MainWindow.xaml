@@ -22,7 +22,6 @@
                     <Label Content="MQTT client端" HorizontalAlignment="Left" Margin="45,17,0,0" VerticalAlignment="Top" FontSize="22"/>
                     <Label Content="主題:" HorizontalAlignment="Left" Margin="45,96,0,0" VerticalAlignment="Top" FontSize="22" Width="57"/>
                     <TextBox x:Name="Topic" Margin="102,98,382,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22"/>
-                    <Grid/>
                 </Grid>
             </TabItem>
             <TabItem Header="Subscriber">
@@ -46,21 +45,24 @@
                     <TextBox x:Name="Topic2" Margin="293,100,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Creater and Viewer">
+            <TabItem Header="公司資料">
                 <Grid Background="#FFFF">
-                    <Label Content="IP:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBox x:Name="ip3" HorizontalAlignment="Left" Margin="56,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Height="33" FontSize="22" Text="220.132.141.9"/>
-                    <TextBox x:Name="port3" HorizontalAlignment="Left" Margin="56,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Height="32" FontSize="22" Text="1999"/>
-                    <Label Content="埠:" HorizontalAlignment="Left" Margin="20,98,0,0" VerticalAlignment="Top" FontSize="22"/>
-                    <Label Content="Machine Creater" HorizontalAlignment="Left" Margin="22,17,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Label Content="主題:" HorizontalAlignment="Left" Margin="20,136,0,0" VerticalAlignment="Top" FontSize="22" Width="57" RenderTransformOrigin="-2.691,-2.46"/>
-                    <ComboBox x:Name="combobox" HorizontalAlignment="Left" Margin="81,142,0,0" VerticalAlignment="Top" Width="135" Height="29"/>
-                    <Button Content="建立" HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" Width="191" Height="36" FontSize="22"/>
-                    <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="236,28,19,12"/> -->
-                    <TextBox x:Name="listener" Margin="236,28,19,12" Background="#FFF1E8E8"/>
+                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,91"/>
+                    <Button Content="" HorizontalAlignment="Left" Margin="28,342,0,0" VerticalAlignment="Top" Height="37" Width="137"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Listener">
+            <TabItem Header="逼卡機資料">
+                <Grid Background="#FFFF">
+                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,91"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="員工資料">
+                <Grid Background="#FFFF">
+                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,91"/>
+                    <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="236,28,19,12"/> -->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Data Sereacher">
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="datagrid" Margin="28,28,28,91"/>
                     <Button x:Name="startbtn1" Content="start" Margin="28,338,28,0" Click="startbtn1_Click" FontSize="22"  Height="38" VerticalAlignment="Top"/>
