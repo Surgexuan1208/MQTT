@@ -48,7 +48,7 @@
             <TabItem Header="公司資料">
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="comdatagrid" Margin="28,28,28,78"/>
-                    <Grid Background="#FFFF" Margin="28,0,28,8" Height="78" VerticalAlignment="Bottom">
+                    <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -64,13 +64,36 @@
             </TabItem>
             <TabItem Header="逼卡機資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,91"/>
+                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,78"/>
+                    <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="新增" FontSize="22" Height="55"/>
+                        <Button Grid.Column="1" Content="修改" FontSize="22" Height="55"/>
+                        <Button Grid.Column="2" Content="查詢" FontSize="22" Height="55"/>
+                        <Button Grid.Column="3" Content="刪除" FontSize="22" Height="55"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="員工資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,91"/>
-                    <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="236,28,19,12"/> -->
+                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,78"/>
+                    <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="新增" FontSize="22" Height="55"/>
+                        <Button Grid.Column="1" Content="修改" FontSize="22" Height="55"/>
+                        <Button Grid.Column="2" Content="查詢" FontSize="22" Height="55"/>
+                        <Button Grid.Column="3" Content="刪除" FontSize="22" Height="55"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Data Sereacher">

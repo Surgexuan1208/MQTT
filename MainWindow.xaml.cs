@@ -30,6 +30,9 @@ namespace MQTT
         public MainWindow()
         {
             InitializeComponent();
+            SetDataGridTextSize(comdatagrid, 22);
+            SetDataGridTextSize(machdatagrid, 22);
+            SetDataGridTextSize(memdatagrid, 22);
             MySQLOpen();
         }
         List<Member> members = new List<Member>();
@@ -94,6 +97,12 @@ namespace MQTT
                 }
             }
             machdatagrid.ItemsSource = machines;
+        }
+        private void SetDataGridTextSize(DataGrid dataGrid, double fontSize)
+        {
+            Style cellStyle = new Style(typeof(DataGridCell));
+            cellStyle.Setters.Add(new Setter(TextBlock.FontSizeProperty, fontSize));
+            dataGrid.CellStyle = cellStyle;
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private async void Button_Click(object sender, RoutedEventArgs e)
