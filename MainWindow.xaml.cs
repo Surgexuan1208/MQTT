@@ -170,9 +170,15 @@ namespace MQTT
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
 
         }
-        private void startbtn1_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            Addcom newWindow = new Addcom();
+            if (newWindow.ShowDialog() == true)
+            {
+                string data = newWindow.GetData();
+                // 在這裡處理從新視窗中取得的資料
+                MessageBox.Show("您輸入的資料是：" + data);
+            }
         }
     }
 }

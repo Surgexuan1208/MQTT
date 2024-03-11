@@ -54,11 +54,13 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新增" FontSize="22" Height="55"/>
-                        <Button Grid.Column="1" Content="修改" FontSize="22" Height="55"/>
-                        <Button Grid.Column="2" Content="查詢" FontSize="22" Height="55"/>
-                        <Button Grid.Column="3" Content="刪除" FontSize="22" Height="55"/>
+                        <Button Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="Button_Click_1"/>
+                        <Button Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55"/>
+                        <Button Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55"/>
+                        <Button Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55"/>
+                        <Button Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -99,7 +101,7 @@
             <TabItem Header="Data Sereacher">
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="datagrid" Margin="28,28,28,91"/>
-                    <Button x:Name="startbtn1" Content="start" Margin="28,338,28,0" Click="startbtn1_Click" FontSize="22"  Height="38" VerticalAlignment="Top"/>
+                    <Button x:Name="startbtn1" Content="start" Margin="28,338,28,0" FontSize="22"  Height="38" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>
