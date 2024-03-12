@@ -8,7 +8,7 @@
         Title="MQTT" Height="457" Width="661">
     <Grid Background="#EEB8B8">
         <TabControl>
-            <TabItem Header="Client">
+            <!--<TabItem Header="Client">
                 <Grid Background="#FFFF">
                     <Button x:Name="connect" Content="連接及傳送" Margin="45,324,45,0" Click="Button_Click" FontSize="22" Height="54" VerticalAlignment="Top"/>
                     <TextBox x:Name="ip" HorizontalAlignment="Left" Margin="82,57,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="161" Height="33" FontSize="22"/>
@@ -44,7 +44,7 @@
                     <Label Content="主題:" HorizontalAlignment="Left" Margin="237,98,0,0" VerticalAlignment="Top" FontSize="22" Width="57" RenderTransformOrigin="-2.691,-2.46"/>
                     <TextBox x:Name="Topic2" Margin="293,100,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5"/>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="公司資料">
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="comdatagrid" Margin="28,28,28,78"/>
@@ -56,11 +56,11 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="Button_Click_1"/>
-                        <Button Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55"/>
+                        <Button x:Name="addbtn" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click1"/>
+                        <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click1"/>
+                        <Button x:Name="rfhbtn" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click1"/>
+                        <Button x:Name="srhbtn" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click1"/>
+                        <Button x:Name="delbtn" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click1"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -75,11 +75,11 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="Button_Click_1"/>
-                        <Button Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55"/>
+                        <Button x:Name="addbtn2" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click2"/>
+                        <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click2"/>
+                        <Button x:Name="rfhbtn2" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click2"/>
+                        <Button x:Name="srhbtn2" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click2"/>
+                        <Button x:Name="delbtn2" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click2"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -94,11 +94,11 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="Button_Click_1"/>
-                        <Button Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55"/>
-                        <Button Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55"/>
+                        <Button x:Name="addbtn3" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click3"/>
+                        <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click3"/>
+                        <Button x:Name="rfhbtn3" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click3"/>
+                        <Button x:Name="srhbtn3" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click3"/>
+                        <Button x:Name="delbtn3" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click3"/>
                     </Grid>
                 </Grid>
             </TabItem>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="MQTT.Addmember"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MQTT"
+        mc:Ignorable="d"
+        Title="Addmember" Height="450" Width="800">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="ScaledCheckBoxStyle" TargetType="CheckBox">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                        <!-- 放大为原来的两倍 -->
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid Background="#FFFF" Margin="28,0,28,20"  VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="確定新增" FontSize="22" Height="55" Click="Button_Click"/>
+            <Button Grid.Column="1" Content="放棄資料" FontSize="22" Height="55" Click="Button_Click_1"/>
+        </Grid>
+        <Grid Background="#FFFF" Margin="28,55,28,0"  VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="卡機代號:" FontSize="24" Height="55"/>
+            <TextBox x:Name="txtname" Grid.Column="1" FontSize="24" Height="46"/>
+            <Label Grid.Column="2" Content="公司代號:" FontSize="24" Height="55"/>
+            <TextBox x:Name="txtid" Grid.Column="3" FontSize="24" Height="46"/>
+        </Grid>
+        <Label Content="機器是否啟動:" HorizontalAlignment="Left" Margin="30,150,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="機器位址:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox Margin="145,225,28,102" TextWrapping="Wrap" FontSize="24"/>
+        <CheckBox Style="{StaticResource ScaledCheckBoxStyle}" Content="" HorizontalAlignment="Left" Margin="190,157,0,0" VerticalAlignment="Top" IsChecked="False"/>
+    </Grid>
+</Window>

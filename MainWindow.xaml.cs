@@ -33,13 +33,16 @@ namespace MQTT
             SetDataGridTextSize(comdatagrid, 22);
             SetDataGridTextSize(machdatagrid, 22);
             SetDataGridTextSize(memdatagrid, 22);
-            MySQLOpen();
+            MySQLCreatelist();
         }
         List<Member> members = new List<Member>();
         List<Machine> machines = new List<Machine>();
         List<Company> companies = new List<Company>();
-        private void MySQLOpen()
+        private void MySQLCreatelist()
         {
+            machines.Clear();
+            members.Clear();
+            companies.Clear();
             string database = "company_db";
             string databaseServer = "220.132.141.9";
             string databasePort = "6833";
@@ -61,6 +64,7 @@ namespace MQTT
                         }
                     }
                 }
+                connection.Close();
             }
             memdatagrid.ItemsSource = members;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -78,13 +82,14 @@ namespace MQTT
                         }
                     }
                 }
+                connection.Close();
             }
             comdatagrid.ItemsSource = companies;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
                 // 在這裡執行資料庫操作
-                string sql = "SELECT * FROM company_info_db";
+                string sql = "SELECT * FROM machine_db";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -95,6 +100,7 @@ namespace MQTT
                         }
                     }
                 }
+                connection.Close();
             }
             machdatagrid.ItemsSource = machines;
         }
@@ -105,7 +111,7 @@ namespace MQTT
             dataGrid.CellStyle = cellStyle;
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        /*private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Topic.Text.Length <1 ||Topic.Text.Length==0)
             {
@@ -141,13 +147,9 @@ namespace MQTT
             {
                 MessageBox.Show($"錯誤：{ex.Message}");
             }
-        }
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-          
-        }
+        }*/
         // 斷開連接
-        private async void StopButton_Click(object sender, EventArgs e)
+        /*private async void StopButton_Click(object sender, EventArgs e)
         {
             cancellationTokenSource.Cancel();
             stopbtn.IsEnabled = false;
@@ -169,16 +171,83 @@ namespace MQTT
             startbtn.IsEnabled = true;
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
 
-        }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        }*/
+        private void addbtn_Click1(object sender, RoutedEventArgs e)
         {
-            Addcom newWindow = new Addcom();
-            if (newWindow.ShowDialog() == true)
-            {
-                string data = newWindow.GetData();
-                // 在這裡處理從新視窗中取得的資料
-                MessageBox.Show("您輸入的資料是：" + data);
-            }
+            Addcom newWindow1 = new Addcom();
+            newWindow1.Show();
+        }
+
+        private void rfhbtn_Click1(object sender, RoutedEventArgs e)
+        {
+            MySQLCreatelist();
+            MessageBox.Show("已成功刷新資料庫");
+        }
+
+        private void chgbtn_Click1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void srhbtn_Click1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delbtn_Click1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addbtn_Click2(object sender, RoutedEventArgs e)
+        {
+            Addmember newWindow2 = new Addmember();
+            newWindow2.Show();
+        }
+
+        private void chgbtn_Click2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rfhbtn_Click2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void srhbtn_Click2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delbtn_Click2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void chgbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rfhbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void srhbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
