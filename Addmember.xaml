@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MQTT"
         mc:Ignorable="d"
-        Title="Addmember" Height="450" Width="800">
+        Title="Addmember" Height="500" Width="800">
     <Grid>
         <Grid.Resources>
             <Style x:Key="ScaledCheckBoxStyle" TargetType="CheckBox">
@@ -17,7 +17,7 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Grid Background="#FFFF" Margin="28,0,28,20"  VerticalAlignment="Bottom">
+        <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -25,21 +25,57 @@
             <Button Grid.Column="0" Content="確定新增" FontSize="22" Height="55" Click="Button_Click"/>
             <Button Grid.Column="1" Content="放棄資料" FontSize="22" Height="55" Click="Button_Click_1"/>
         </Grid>
-        <Grid Background="#FFFF" Margin="28,55,28,0"  VerticalAlignment="Top">
+        <Grid Background="#FFFF" Margin="28,47,28,0"  VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.18*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="1.25*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="卡機代號:" FontSize="24" Height="55"/>
+            <Label Grid.Column="0" Content="員工姓名:" FontSize="24" Height="55"/>
             <TextBox x:Name="txtname" Grid.Column="1" FontSize="24" Height="46"/>
-            <Label Grid.Column="2" Content="公司代號:" FontSize="24" Height="55"/>
+            <Label Grid.Column="2" Content=" 公司代號:" FontSize="24" Height="55"/>
             <TextBox x:Name="txtid" Grid.Column="3" FontSize="24" Height="46"/>
+            <Label Grid.Column="4" Content="職      稱:" FontSize="24" Height="55"/>
+            <TextBox x:Name="txtlevel" Grid.Column="5" FontSize="24" Height="46"/>
         </Grid>
-        <Label Content="機器是否啟動:" HorizontalAlignment="Left" Margin="30,150,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Label Content="機器位址:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox Margin="145,225,28,102" TextWrapping="Wrap" FontSize="24"/>
-        <CheckBox Style="{StaticResource ScaledCheckBoxStyle}" Content="" HorizontalAlignment="Left" Margin="190,157,0,0" VerticalAlignment="Top" IsChecked="False"/>
+        <Grid Background="#FFFF" Margin="28,120,28,0"  VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.33*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width="1.3*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="電話(市):" FontSize="24"/>
+            <TextBox x:Name="txtphone" Grid.Column="1" FontSize="24" Height="46"/>
+            <Label Grid.Column="2" Content="生 日:" FontSize="24"/>
+            <TextBox x:Name="txtbday" Grid.Column="3" FontSize="24" Height="46"/>
+            <Label Grid.Column="4" Content="登記日期:" FontSize="24"/>
+            <TextBox x:Name="txtfday" Grid.Column="5" FontSize="24" Height="46"/>
+        </Grid>
+        <Label Content="住家地址:" HorizontalAlignment="Left" Margin="30,189,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="txtaddress" Margin="145,185,28,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="46"/>
+        <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top" FontSize="24" Width="115"/>
+        <TextBox Margin="145,330,28,80" TextWrapping="Wrap" FontSize="24"/>
+        <Grid Background="#FFFF" Margin="28,260,28,0"  VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.85*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="員工代號:" FontSize="24"/>
+            <TextBox Grid.Column="1" FontSize="24" IsEnabled="False"/>
+            <Label Grid.Column="2" Content=" 編輯代號:" FontSize="24"/>
+            <Button Grid.Column="3" FontSize="24" Content="開啟"/>
+            <Label Grid.Column="4" Content=" 員工啟用:" FontSize="24"/>
+            <CheckBox Grid.Column="4" Style="{StaticResource ScaledCheckBoxStyle}" FontSize="24" Grid.ColumnSpan="2" Margin="125,4,0,-4"/>
+        </Grid>
     </Grid>
 </Window>

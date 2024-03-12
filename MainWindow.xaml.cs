@@ -201,7 +201,7 @@ namespace MQTT
 
         private void addbtn_Click2(object sender, RoutedEventArgs e)
         {
-            Addmember newWindow2 = new Addmember();
+            Addmachine newWindow2 = new Addmachine();
             newWindow2.Show();
         }
 
@@ -212,7 +212,8 @@ namespace MQTT
 
         private void rfhbtn_Click2(object sender, RoutedEventArgs e)
         {
-
+            MySQLCreatelist();
+            MessageBox.Show("已成功刷新資料庫");
         }
 
         private void srhbtn_Click2(object sender, RoutedEventArgs e)
@@ -227,7 +228,8 @@ namespace MQTT
 
         private void addbtn_Click3(object sender, RoutedEventArgs e)
         {
-
+            Addmember newWindow3 = new Addmember();
+            newWindow3.Show();
         }
 
         private void chgbtn_Click3(object sender, RoutedEventArgs e)
@@ -237,7 +239,8 @@ namespace MQTT
 
         private void rfhbtn_Click3(object sender, RoutedEventArgs e)
         {
-
+            MySQLCreatelist();
+            MessageBox.Show("已成功刷新資料庫");
         }
 
         private void srhbtn_Click3(object sender, RoutedEventArgs e)

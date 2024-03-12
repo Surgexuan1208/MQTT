@@ -47,7 +47,7 @@
             </TabItem>-->
             <TabItem Header="公司資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,78"/>
+                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -66,7 +66,7 @@
             </TabItem>
             <TabItem Header="逼卡機資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,78"/>
+                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -85,7 +85,7 @@
             </TabItem>
             <TabItem Header="員工資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,78"/>
+                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -16,11 +16,11 @@ using MySql.Data.MySqlClient;
 namespace MQTT
 {
     /// <summary>
-    /// Addcom.xaml 的互動邏輯
+    /// Addmachine.xaml 的互動邏輯
     /// </summary>
-    public partial class Addcom : Window
+    public partial class Addmachine : Window
     {
-        public Addcom()
+        public Addmachine()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (txtid.Text.Length > 0 && txtname.Text.Length > 0 && txtaddress.Text.Length > 0 && txtphone.Text.Length > 0)
+            if (txtcid.Text.Length > 0 && txtmid.Text.Length > 0 && txtdes.Text.Length > 0)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -52,10 +52,10 @@ namespace MQTT
                     }
                     connection.Close();
                 }
-                var foundItems = comID.Where(item => item.Contains(txtid.Text)).ToList();
-                if (foundItems.Any())
+                var foundItems = comID.Where(item => item.Contains(txtcid.Text)).ToList();
+                if (!foundItems.Any())
                 {
-                    MessageBox.Show("ID不能重複");
+                    MessageBox.Show("ID不存在");
                     return;
                 }
             }
@@ -65,33 +65,40 @@ namespace MQTT
                 return;
             }
             MessageBoxResult result = MessageBox.Show("確定要上傳嗎?", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes){
+            if (result == MessageBoxResult.Yes)
+            {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     string insertSql =
-                        "INSERT INTO company_info_db (ID, Name, Address, Cellphone) VALUES (@id, @name, @address, @cellphone)";
+                        "INSERT INTO machine_db (Company_ID, Machine_ID, Machine_Location, Status, Effect) VALUES (@cid, @mid, @ml, @st,@effect)";
                     using (MySqlCommand insertCommand = new MySqlCommand(insertSql, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@id", txtid.Text);
-                        insertCommand.Parameters.AddWithValue("@name", txtname.Text);
-                        insertCommand.Parameters.AddWithValue("@address", txtaddress.Text);
-                        insertCommand.Parameters.AddWithValue("@cellphone", txtphone.Text);
+                        insertCommand.Parameters.AddWithValue("@cid", txtcid.Text);
+                        insertCommand.Parameters.AddWithValue("@mid", txtmid.Text);
+                        insertCommand.Parameters.AddWithValue("@ml", txtdes.Text);
+                        insertCommand.Parameters.AddWithValue("@st", 0);
+                        insertCommand.Parameters.AddWithValue("@effect", chken.IsChecked);
                         int rowsAffected = insertCommand.ExecuteNonQuery();
                     }
                     connection.Close();
                 }
                 this.Close();
-            }else{
+            }
+            else
+            {
                 return;
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("確定要放棄嗎?", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes){
+            if (result == MessageBoxResult.Yes)
+            {
                 this.Close();
-            }else{
+            }
+            else
+            {
                 return;
             }
         }
