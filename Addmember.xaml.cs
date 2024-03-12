@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 
 namespace MQTT
@@ -103,6 +104,20 @@ namespace MQTT
             {
                 return;
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (txtmid.IsEnabled)
+            {
+                txtmid.IsEnabled = false;
+                editmid.Content = "開啟";
+            }
+            else { 
+                txtmid.IsEnabled = true;
+                editmid.Content = "關閉";
+            }
+            
         }
     }
 }
