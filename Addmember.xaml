@@ -75,7 +75,7 @@
             <Label Grid.Column="2" Content=" 編輯代號:" FontSize="24"/>
             <Button x:Name="editmid" Grid.Column="3" FontSize="24" Content="開啟" Click="Button_Click_2"/>
             <Label Grid.Column="4" Content=" 員工啟用:" FontSize="24"/>
-            <CheckBox x:Name="chken" Grid.Column="4" Style="{StaticResource ScaledCheckBoxStyle}" FontSize="24" Grid.ColumnSpan="2" Margin="125,4,0,-4"/>
+            <CheckBox x:Name="chken" Grid.Column="4" Style="{StaticResource ScaledCheckBoxStyle}" FontSize="24" Grid.ColumnSpan="2" Margin="125,7,0,-7"/>
         </Grid>
     </Grid>
 </Window>

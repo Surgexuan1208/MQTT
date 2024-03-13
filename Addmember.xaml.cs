@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 
@@ -27,6 +28,29 @@ namespace MQTT
             InitializeComponent();
         }
         List<string> comID = new List<string>();
+        Dictionary<string, List<string>> members = new Dictionary<string, List<string>>();
+        static void AddEmployee(Dictionary<string, List<string>> companies, string code, string companyKey, string employee)
+        {
+            string key = $"{companyKey}";
+
+            if (!companies.ContainsKey(key))
+            {
+                companies[key] = new List<string>();
+            }
+
+            companies[key].Add(employee);
+        }
+        static bool CheckExistence(Dictionary<string, List<string>> dictionary, string key, string value)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                if (dictionary[key].Contains(value))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string database = "company_db";
@@ -35,8 +59,13 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (true)
+            if (txtname.Text.Length>0&&txtcid.Text.Length>0&&txtlevel.Text.Length>0&&txtphone.Text.Length>0&&txtbday.Text.Length>0&&txtfday.Text.Length>0&&txtaddress.Text.Length>0)
             {
+                if (txtmid.Text.Length!=4)
+                {
+                    MessageBox.Show("員工代號必須為4碼");
+                    return;
+                }
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
@@ -54,10 +83,33 @@ namespace MQTT
                     }
                     connection.Close();
                 }
-                var foundItems = comID.Where(item => item.Contains("1")).ToList();
-                if (!foundItems.Any())
+                var foundItems1 = comID.Where(item => item.Contains(txtcid.Text)).ToList();
+                if (!foundItems1.Any())
                 {
-                    MessageBox.Show("ID不存在");
+                    MessageBox.Show($"公司ID {txtcid.Text} 不存在");
+                    return;
+                }
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                    // 在這裡執行資料庫操作
+                    string sql = "SELECT * FROM member_db";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                AddEmployee(members, reader.GetString("Card_ID"), reader.GetString("Company_ID"), reader.GetString("Card_ID"));
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+
+                if (CheckExistence(members,txtcid.Text,txtmid.Text))
+                {
+                    MessageBox.Show($"公司 {txtcid.Text} 中，員工ID {txtmid.Text} 已存在");
                     return;
                 }
             }
@@ -72,15 +124,17 @@ namespace MQTT
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string insertSql =
-                        "INSERT INTO machine_db (Company_ID, Machine_ID, Machine_Location, Status, Effect) VALUES (@cid, @mid, @ml, @st,@effect)";
+                    string insertSql = "INSERT INTO member_db (Company_ID, Card_ID, Name, Address, Cellphone, First_Day, Birth_Day, Effect) VALUES (@comid, @carid, @n, @a, @c, @f, @b, @e)";
                     using (MySqlCommand insertCommand = new MySqlCommand(insertSql, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@cid","1");
-                        insertCommand.Parameters.AddWithValue("@mid","1");
-                        insertCommand.Parameters.AddWithValue("@ml", "1");
-                        insertCommand.Parameters.AddWithValue("@st", 0);
-                        insertCommand.Parameters.AddWithValue("@effect","1");
+                        insertCommand.Parameters.AddWithValue("@comid",txtcid.Text);
+                        insertCommand.Parameters.AddWithValue("@carid",txtmid.Text);
+                        insertCommand.Parameters.AddWithValue("@n", txtname.Text);
+                        insertCommand.Parameters.AddWithValue("@a", txtaddress.Text);
+                        insertCommand.Parameters.AddWithValue("@c", txtphone.Text);
+                        insertCommand.Parameters.AddWithValue("@f", txtfday.Text);
+                        insertCommand.Parameters.AddWithValue("@b", txtbday.Text);
+                        insertCommand.Parameters.AddWithValue("@e", chken.IsChecked);
                         int rowsAffected = insertCommand.ExecuteNonQuery();
                     }
                     connection.Close();
@@ -92,7 +146,6 @@ namespace MQTT
                 return;
             }
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("確定要放棄嗎?", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -105,7 +158,6 @@ namespace MQTT
                 return;
             }
         }
-
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (txtmid.IsEnabled)
