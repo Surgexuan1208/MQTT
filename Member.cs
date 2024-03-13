@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MQTT
 {
-    internal class Member
+    public class Member
     {
         public string Company_ID { get; set; }
         public string Card_ID { get; set; }

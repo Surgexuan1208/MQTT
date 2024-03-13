@@ -7,7 +7,7 @@ using System.Windows.Media.Effects;
 
 namespace MQTT
 {
-    internal class Machine
+    public class Machine
     {
         public string Company_ID { get; set; }
         public string Machine_ID { get; set; }

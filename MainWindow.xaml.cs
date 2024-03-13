@@ -186,7 +186,14 @@ namespace MQTT
 
         private void chgbtn_Click1(object sender, RoutedEventArgs e)
         {
-
+            if (comdatagrid.SelectedIndex >= 0 && comdatagrid.SelectedIndex < companies.Count)
+            {
+                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex]);
+                newWindow4.Show();
+            }else{
+                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+            }
         }
 
         private void srhbtn_Click1(object sender, RoutedEventArgs e)
@@ -196,7 +203,54 @@ namespace MQTT
 
         private void delbtn_Click1(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                result = MessageBox.Show("確定要刪除嗎?(1次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    result = MessageBox.Show("確定要刪除嗎?(2次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        result = MessageBox.Show("確定要刪除嗎?(3次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            string database = "company_db";
+                            string databaseServer = "220.132.141.9";
+                            string databasePort = "6833";
+                            string databaseUser = "root";
+                            string databasePassword = "edys1234";
+                            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+                            using (MySqlConnection connection = new MySqlConnection(connectionString))
+                            {
+                                connection.Open();
+                                string deleteSql ="DELETE FROM company_info_db WHERE ID = @i";
+                                using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
+                                {
+                                    deleteCommand.Parameters.AddWithValue("@i", companies[comdatagrid.SelectedIndex].Company_ID);
+                                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void addbtn_Click2(object sender, RoutedEventArgs e)
