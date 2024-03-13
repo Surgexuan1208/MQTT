@@ -203,6 +203,13 @@ namespace MQTT
 
         private void delbtn_Click1(object sender, RoutedEventArgs e)
         {
+            if (comdatagrid.SelectedIndex >= 0 && comdatagrid.SelectedIndex < companies.Count)
+            {
+
+            }else{                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+                return;
+            }
             MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
