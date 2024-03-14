@@ -112,6 +112,7 @@ namespace MQTT
             {
                 txtmid.IsEnabled = false;
                 editmid.Content = "開啟";
+
             }
             else { 
                 txtmid.IsEnabled = true;
