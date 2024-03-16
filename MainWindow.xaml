@@ -81,8 +81,8 @@
                         <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click1"/>
                         <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
                         <Button x:Name="delbtn" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click1"/>
-                        <Button x:Name="savbtn" Grid.Column="4" Content="存檔" FontSize="35" Height="55" Click="Button_Click"/>
-                        <Button x:Name="gupbtn" Grid.Column="5" Content="放棄" FontSize="35" Height="55" Click="Button_Click_1"/>
+                        <Button x:Name="savbtn" Grid.Column="4" Content="存檔(Save)" FontSize="35" Height="55" Click="Button_Click"/>
+                        <Button x:Name="gupbtn" Grid.Column="5" Content="放棄(Quit)" FontSize="35" Height="55" Click="Button_Click_1"/>
                     </Grid>
                 </Grid>
             </TabItem>
