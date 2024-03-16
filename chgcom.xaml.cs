@@ -22,7 +22,8 @@ namespace MQTT
     {
         public string originID;
         public int mode;
-        public chgcom(Company c)
+        private MainWindow mainWindow;
+        public chgcom(Company c, MainWindow mainWindow)
         {
             InitializeComponent();
             txtid.Text = c.Company_ID;
@@ -31,6 +32,7 @@ namespace MQTT
             txtphone.Text = c.Cellphone;
             originID = c.Company_ID;
             mode = 0;
+            this.mainWindow = mainWindow;
         }
         List<string> comID = new List<string>();
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -129,7 +131,7 @@ namespace MQTT
                         connection.Close();
                     }
                 }
-                
+                mainWindow.MySQLCreatelist();
                 this.Close();
             }
             else

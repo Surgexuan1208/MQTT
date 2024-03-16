@@ -19,6 +19,7 @@ using System.Threading;
 using System.Reflection.PortableExecutable;
 using MySql.Data.MySqlClient;
 using System.Windows.Media.Effects;
+using System.ComponentModel;
 
 namespace MQTT
 {
@@ -30,19 +31,24 @@ namespace MQTT
         public MainWindow()
         {
             InitializeComponent();
-            SetDataGridTextSize(comdatagrid, 22);
-            SetDataGridTextSize(machdatagrid, 22);
-            SetDataGridTextSize(memdatagrid, 22);
+            SetDataGridTextSize(comdatagrid, 40);
+            SetDataGridTextSize(machdatagrid,40);
+            SetDataGridTextSize(memdatagrid, 40);
+            this.WindowState = WindowState.Maximized;
             MySQLCreatelist();
         }
+
         List<Member> members = new List<Member>();
         List<Machine> machines = new List<Machine>();
         List<Company> companies = new List<Company>();
-        private void MySQLCreatelist()
+        public void MySQLCreatelist()
         {
             machines.Clear();
             members.Clear();
             companies.Clear();
+            comdatagrid.ItemsSource = null;
+            machdatagrid.ItemsSource= null;
+            memdatagrid.ItemsSource= null;
             string database = "company_db";
             string databaseServer = "220.132.141.9";
             string databasePort = "6833";
@@ -174,21 +180,15 @@ namespace MQTT
         }*/
         private void addbtn_Click1(object sender, RoutedEventArgs e)
         {
-            Addcom newWindow1 = new Addcom();
+            Addcom newWindow1 = new Addcom(this);
             newWindow1.Show();
-        }
-
-        private void rfhbtn_Click1(object sender, RoutedEventArgs e)
-        {
-            MySQLCreatelist();
-            MessageBox.Show("已成功刷新資料庫");
         }
 
         private void chgbtn_Click1(object sender, RoutedEventArgs e)
         {
             if (comdatagrid.SelectedIndex >= 0 && comdatagrid.SelectedIndex < companies.Count)
             {
-                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex]);
+                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex],this);
                 newWindow4.Show();
             }else{
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
@@ -238,6 +238,7 @@ namespace MQTT
                                     int rowsAffected = deleteCommand.ExecuteNonQuery();
                                 }
                             }
+                            MySQLCreatelist();
                         }
                         else
                         {
@@ -271,12 +272,6 @@ namespace MQTT
 
         }
 
-        private void rfhbtn_Click2(object sender, RoutedEventArgs e)
-        {
-            MySQLCreatelist();
-            MessageBox.Show("已成功刷新資料庫");
-        }
-
         private void srhbtn_Click2(object sender, RoutedEventArgs e)
         {
 
@@ -298,18 +293,22 @@ namespace MQTT
 
         }
 
-        private void rfhbtn_Click3(object sender, RoutedEventArgs e)
-        {
-            MySQLCreatelist();
-            MessageBox.Show("已成功刷新資料庫");
-        }
-
         private void srhbtn_Click3(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void delbtn_Click3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
         }

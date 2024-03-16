@@ -20,9 +20,11 @@ namespace MQTT
     /// </summary>
     public partial class Addcom : Window
     {
-        public Addcom()
+        private MainWindow mainWindow;
+        public Addcom(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
         List<string> comID = new List<string>();
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,7 +35,7 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (txtid.Text.Length > 0 && txtname.Text.Length > 0 && txtaddress.Text.Length > 0 && txtphone.Text.Length > 0)
+            if (txtid.Text.Length > 0 && txtname.Text.Length > 0 && txtphone.Text.Length > 0)
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
@@ -75,12 +77,13 @@ namespace MQTT
                     {
                         insertCommand.Parameters.AddWithValue("@id", txtid.Text);
                         insertCommand.Parameters.AddWithValue("@name", txtname.Text);
-                        insertCommand.Parameters.AddWithValue("@address", txtaddress.Text);
+                        insertCommand.Parameters.AddWithValue("@address", "0");
                         insertCommand.Parameters.AddWithValue("@cellphone", txtphone.Text);
                         int rowsAffected = insertCommand.ExecuteNonQuery();
                     }
                     connection.Close();
                 }
+                mainWindow.MySQLCreatelist();
                 this.Close();
             }else{
                 return;

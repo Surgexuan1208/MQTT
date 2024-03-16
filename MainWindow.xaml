@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MQTT"
         mc:Ignorable="d"
-        Title="MQTT" Height="457" Width="661">
+        Title="MQTT" Height="1080" Width="1920">
     <Grid Background="#EEB8B8">
         <TabControl>
             <!--<TabItem Header="Client">
@@ -45,22 +45,48 @@
                     <TextBox x:Name="Topic2" Margin="293,100,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5"/>
                 </Grid>
             </TabItem>-->
-            <TabItem Header="公司資料">
+            <TabItem Header="部門資料">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
+                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,519" IsReadOnly="True"/>
+                    <Grid Background="#FFDAD9D9" Margin="28,0,28,79" Height="430" VerticalAlignment="Bottom">
+                        <Grid VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="確定新增" FontSize="35" Height="55" Click="Button_Click"/>
+                            <Button Grid.Column="1" Content="放棄資料" FontSize="35" Height="55" Click="Button_Click_1"/>
+                        </Grid>
+                        <Grid Margin="0,6,28,315">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="部     門     名     稱:" FontSize="35" Height="65" Grid.Column="0"/>
+                            <TextBox x:Name="txtname" FontSize="35" Height="65" Grid.Column="1"/>
+                            <Label Content="部     門     代     號:" FontSize="35" Height="65" Width="288" Grid.Column="2"/>
+                            <TextBox x:Name="txtid" FontSize="35" Height="65" Grid.Column="3"/>
+                        </Grid>
+                        <Label Content="部     門     電     話:" HorizontalAlignment="Left" Margin="0,0,0,256" FontSize="35" Width="298" Height="54" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="303,0,0,251" TextWrapping="Wrap" Width="500" FontSize="35" Height="65" VerticalAlignment="Bottom"/>
+                        <Label Content="部     門     地     址:" HorizontalAlignment="Left" FontSize="35" Width="298" Margin="0,0,0,170" Height="54" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtaddress" HorizontalAlignment="Left" Margin="303,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="915" FontSize="35" Height="66"/>
+                        <Label Content="備     註:" HorizontalAlignment="Left" Margin="0,0,0,83" FontSize="35" Width="135" Height="54" VerticalAlignment="Bottom"/>
+                        <TextBox Margin="145,0,28,76" TextWrapping="Wrap" FontSize="35" Height="72" VerticalAlignment="Bottom"/>
+                    </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="addbtn" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click1"/>
-                        <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click1"/>
-                        <Button x:Name="rfhbtn" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click1"/>
-                        <Button x:Name="srhbtn" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click1"/>
-                        <Button x:Name="delbtn" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click1"/>
+                        <Button x:Name="addbtn" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click1"/>
+                        <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click1"/>
+                        <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
+                        <Button x:Name="delbtn" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click1"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -73,13 +99,11 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addbtn2" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click2"/>
                         <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click2"/>
-                        <Button x:Name="rfhbtn2" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click2"/>
-                        <Button x:Name="srhbtn2" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click2"/>
-                        <Button x:Name="delbtn2" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click2"/>
+                        <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click2"/>
+                        <Button x:Name="delbtn2" Grid.Column="3" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click2"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -92,13 +116,11 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addbtn3" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click3"/>
                         <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click3"/>
-                        <Button x:Name="rfhbtn3" Grid.Column="2" Content="刷新(Refresh)" FontSize="18" Height="55" Click="rfhbtn_Click3"/>
-                        <Button x:Name="srhbtn3" Grid.Column="3" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click3"/>
-                        <Button x:Name="delbtn3" Grid.Column="4" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click3"/>
+                        <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click3"/>
+                        <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click3"/>
                     </Grid>
                 </Grid>
             </TabItem>

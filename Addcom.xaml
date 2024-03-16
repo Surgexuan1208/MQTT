@@ -22,16 +22,14 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="公司名稱:" FontSize="24" Height="55"/>
+            <Label Grid.Column="0" Content="部門名稱:" FontSize="24" Height="55"/>
             <TextBox x:Name="txtname" Grid.Column="1" FontSize="24" Height="46"/>
-            <Label Grid.Column="2" Content="公司代號:" FontSize="24" Height="55"/>
+            <Label Grid.Column="2" Content="部門代號:" FontSize="24" Height="55"/>
             <TextBox x:Name="txtid" Grid.Column="3" FontSize="24" Height="46"/>
         </Grid>
-        <Label Content="公司地址:" HorizontalAlignment="Left" Margin="30,189,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox x:Name="txtaddress" Margin="145,185,28,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="46"/>
-        <Label Content="公司電話:" HorizontalAlignment="Left" Margin="30,120,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Content="部門電話:" HorizontalAlignment="Left" Margin="30,120,0,0" VerticalAlignment="Top" FontSize="24"/>
         <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="145,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" Height="46"/>
-        <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,285,0,0" VerticalAlignment="Top" FontSize="24" Width="115"/>
-        <TextBox Margin="145,251,28,76" TextWrapping="Wrap" FontSize="24"/>
+        <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,255,0,0" VerticalAlignment="Top" FontSize="24" Width="115"/>
+        <TextBox Margin="145,194,28,76" TextWrapping="Wrap" FontSize="24"/>
     </Grid>
 </Window>
