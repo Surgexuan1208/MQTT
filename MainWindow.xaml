@@ -49,14 +49,6 @@
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="comdatagrid" Margin="28,28,28,519" IsReadOnly="True"/>
                     <Grid Background="#FFDAD9D9" Margin="28,0,28,79" Height="430" VerticalAlignment="Bottom">
-                        <Grid VerticalAlignment="Bottom">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Content="確定新增" FontSize="35" Height="55" Click="Button_Click"/>
-                            <Button Grid.Column="1" Content="放棄資料" FontSize="35" Height="55" Click="Button_Click_1"/>
-                        </Grid>
                         <Grid Margin="0,6,28,315">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -73,11 +65,13 @@
                         <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="303,0,0,251" TextWrapping="Wrap" Width="500" FontSize="35" Height="65" VerticalAlignment="Bottom"/>
                         <Label Content="部     門     地     址:" HorizontalAlignment="Left" FontSize="35" Width="298" Margin="0,0,0,170" Height="54" VerticalAlignment="Bottom"/>
                         <TextBox x:Name="txtaddress" HorizontalAlignment="Left" Margin="303,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="915" FontSize="35" Height="66"/>
-                        <Label Content="備     註:" HorizontalAlignment="Left" Margin="0,0,0,83" FontSize="35" Width="135" Height="54" VerticalAlignment="Bottom"/>
-                        <TextBox Margin="145,0,28,76" TextWrapping="Wrap" FontSize="35" Height="72" VerticalAlignment="Bottom"/>
+                        <Label Content="備     註:" HorizontalAlignment="Left" Margin="0,0,0,59" FontSize="35" Width="135" Height="54" VerticalAlignment="Bottom"/>
+                        <TextBox Margin="145,0,28,30" TextWrapping="Wrap" FontSize="35" Height="118" VerticalAlignment="Bottom"/>
                     </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -87,6 +81,8 @@
                         <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click1"/>
                         <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
                         <Button x:Name="delbtn" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click1"/>
+                        <Button x:Name="savbtn" Grid.Column="4" Content="存檔" FontSize="35" Height="55" Click="Button_Click"/>
+                        <Button x:Name="gupbtn" Grid.Column="5" Content="放棄" FontSize="35" Height="55" Click="Button_Click_1"/>
                     </Grid>
                 </Grid>
             </TabItem>
