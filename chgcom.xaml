@@ -5,33 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MQTT"
         mc:Ignorable="d"
-        Title="chgcom" Height="450" Width="800">
+        Title="chgcom" Height="1080" Width="1920">
     <Grid>
         <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="確定更改" FontSize="22" Height="55" Click="Button_Click"/>
-            <Button Grid.Column="1" Content="放棄資料" FontSize="22" Height="55" Click="Button_Click_1"/>
+            <Button Grid.Column="0" Content="確定新增" FontSize="35" Height="65" Click="Button_Click"/>
+            <Button Grid.Column="1" Content="放棄資料" FontSize="35" Height="65" Click="Button_Click_1"/>
         </Grid>
         <Grid Background="#FFFF" Margin="28,47,28,0"  VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="公司名稱:" FontSize="24" Height="55"/>
-            <TextBox x:Name="txtname" Grid.Column="1" FontSize="24" Height="46"/>
-            <Label Grid.Column="2" Content="公司代號:" FontSize="24" Height="55"/>
-            <TextBox x:Name="txtid" Grid.Column="3" FontSize="24" Height="46"/>
+            <Label Grid.Column="0" Content="部門名稱:" FontSize="35" Height="65"/>
+            <TextBox x:Name="txtname" Grid.Column="1" FontSize="35" Height="65"/>
+            <Label Grid.Column="2" Content="部門代號:" FontSize="35" Height="65"/>
+            <TextBox x:Name="txtid" Grid.Column="3" FontSize="35" Height="65"/>
         </Grid>
-        <Label Content="公司地址:" HorizontalAlignment="Left" Margin="30,189,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox x:Name="txtaddress" Margin="145,185,28,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="46"/>
-        <Label Content="公司電話:" HorizontalAlignment="Left" Margin="30,120,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="145,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="24" Height="46"/>
-        <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,285,0,0" VerticalAlignment="Top" FontSize="24" Width="115"/>
-        <TextBox Margin="145,251,28,76" TextWrapping="Wrap" FontSize="24"/>
+        <Label Content="部門電話:" HorizontalAlignment="Left" Margin="30,125,0,0" VerticalAlignment="Top" FontSize="35"/>
+        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="188,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontSize="35" Height="65"/>
+        <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,0,0,455" FontSize="35" Width="158" Height="65" VerticalAlignment="Bottom"/>
+        <TextBox Margin="187,275,28,76" TextWrapping="Wrap" FontSize="24"/>
+        <Label Content="部門地址:" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" FontSize="35"/>
+        <TextBox x:Name="txtaddress" Margin="187,197,28,0" TextWrapping="Wrap" FontSize="35" Height="65" VerticalAlignment="Top"/>
     </Grid>
 </Window>

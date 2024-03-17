@@ -33,6 +33,7 @@ namespace MQTT
             originID = c.Company_ID;
             mode = 0;
             this.mainWindow = mainWindow;
+            this.WindowState = WindowState.Maximized;
         }
         List<string> comID = new List<string>();
         private void Button_Click(object sender, RoutedEventArgs e)

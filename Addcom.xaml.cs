@@ -25,6 +25,7 @@ namespace MQTT
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            this.WindowState = WindowState.Maximized;
         }
         List<string> comID = new List<string>();
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -77,7 +78,7 @@ namespace MQTT
                     {
                         insertCommand.Parameters.AddWithValue("@id", txtid.Text);
                         insertCommand.Parameters.AddWithValue("@name", txtname.Text);
-                        insertCommand.Parameters.AddWithValue("@address", "0");
+                        insertCommand.Parameters.AddWithValue("@address",txtaddress.Text);
                         insertCommand.Parameters.AddWithValue("@cellphone", txtphone.Text);
                         int rowsAffected = insertCommand.ExecuteNonQuery();
                     }
