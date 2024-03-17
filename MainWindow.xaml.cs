@@ -312,5 +312,15 @@ namespace MQTT
         {
 
         }
+
+        private void qitbtn_Click1(object sender, RoutedEventArgs e)
+        {
+            comdatagrid.UnselectAll();
+        }
+
+        private void savbtn_Click1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

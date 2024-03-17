@@ -45,7 +45,7 @@
                     <TextBox x:Name="Topic2" Margin="293,100,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5"/>
                 </Grid>
             </TabItem>-->
-            <TabItem Header="部門資料">
+            <TabItem Header="部門資料" FontSize="25">
                 <Grid Background="#FFFF">
                     <DataGrid x:Name="comdatagrid" Margin="28,28,28,519" IsReadOnly="True"/>
                     <Grid Background="#FFDAD9D9" Margin="28,0,28,79" Height="430" VerticalAlignment="Bottom">
@@ -57,16 +57,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="部     門     名     稱:" FontSize="35" Height="65" Grid.Column="0"/>
-                            <TextBox x:Name="txtname" FontSize="35" Height="65" Grid.Column="1"/>
+                            <TextBox x:Name="txtname" FontSize="35" Height="65" Grid.Column="1" IsEnabled="False"/>
                             <Label Content="部     門     代     號:" FontSize="35" Height="65" Width="288" Grid.Column="2"/>
-                            <TextBox x:Name="txtid" FontSize="35" Height="65" Grid.Column="3"/>
+                            <TextBox x:Name="txtid" FontSize="35" Height="65" Grid.Column="3" IsEnabled="False"/>
                         </Grid>
                         <Label Content="部     門     電     話:" HorizontalAlignment="Left" Margin="0,0,0,256" FontSize="35" Width="298" Height="54" VerticalAlignment="Bottom"/>
-                        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="303,0,0,251" TextWrapping="Wrap" Width="500" FontSize="35" Height="65" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="303,0,0,251" TextWrapping="Wrap" Width="500" FontSize="35" Height="65" VerticalAlignment="Bottom" IsEnabled="False"/>
                         <Label Content="部     門     地     址:" HorizontalAlignment="Left" FontSize="35" Width="298" Margin="0,0,0,170" Height="54" VerticalAlignment="Bottom"/>
-                        <TextBox x:Name="txtaddress" HorizontalAlignment="Left" Margin="303,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="915" FontSize="35" Height="66"/>
+                        <TextBox x:Name="txtaddress" HorizontalAlignment="Left" Margin="303,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="915" FontSize="35" Height="66" IsEnabled="False"/>
                         <Label Content="備     註:" HorizontalAlignment="Left" Margin="0,0,0,59" FontSize="35" Width="135" Height="54" VerticalAlignment="Bottom"/>
-                        <TextBox Margin="145,0,28,30" TextWrapping="Wrap" FontSize="35" Height="118" VerticalAlignment="Bottom"/>
+                        <TextBox Margin="145,0,28,30" TextWrapping="Wrap" FontSize="35" Height="118" VerticalAlignment="Bottom" IsEnabled="False"/>
                     </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
@@ -81,49 +81,153 @@
                         <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click1"/>
                         <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
                         <Button x:Name="delbtn" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click1"/>
-                        <Button x:Name="savbtn" Grid.Column="4" Content="存檔(Save)" FontSize="35" Height="55" Click="Button_Click"/>
-                        <Button x:Name="gupbtn" Grid.Column="5" Content="放棄(Quit)" FontSize="35" Height="55" Click="Button_Click_1"/>
+                        <Button x:Name="savbtn" Grid.Column="4" Content="存檔(Save)" FontSize="35" Height="55" Click="savbtn_Click1"/>
+                        <Button x:Name="qitbtn" Grid.Column="5" Content="放棄(Quit)" FontSize="35" Height="55" Click="qitbtn_Click1"/>
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="逼卡機資料">
+            <TabItem Header="逼卡機資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
+                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,519" IsReadOnly="True"/>
+                    <Grid Background="#FFDAD9D9" Margin="28,0,28,79" Height="430" VerticalAlignment="Bottom">
+                        <Grid.Resources>
+                            <Style x:Key="ScaledCheckBoxStyle" TargetType="CheckBox">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="4" ScaleY="4.3"/>
+                                        <!-- 放大为原来的两倍 -->
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid Margin="28,55,28,0"  VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="機器代號:" FontSize="35" Height="65"/>
+                            <TextBox x:Name="txtmid" Grid.Column="1" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="2" Content="公司代號:" FontSize="35" Height="65"/>
+                            <ComboBox x:Name="txtcid" Grid.Column="3" FontSize="35" Height="65" IsEnabled="False"/>
+                        </Grid>
+                        <Label Content="機器是否啟用:" HorizontalAlignment="Left" Margin="30,0,0,214" FontSize="35" Height="54" VerticalAlignment="Bottom"/>
+                        <Label Content="機器位址:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" FontSize="35"/>
+                        <TextBox x:Name="txtdes" Margin="193,0,28,105" FontSize="35" Height="65" VerticalAlignment="Bottom" IsEnabled="False"/>
+                        <CheckBox x:Name="chken" Style="{StaticResource ScaledCheckBoxStyle}" Content="" HorizontalAlignment="Left" Margin="262,0,0,239" IsChecked="False" Height="31" VerticalAlignment="Bottom" IsEnabled="False"/>
+                    </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="addbtn2" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click2"/>
-                        <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click2"/>
-                        <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click2"/>
-                        <Button x:Name="delbtn2" Grid.Column="3" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click2"/>
+                        <Button x:Name="addbtn2" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click2"/>
+                        <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click2"/>
+                        <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click2"/>
+                        <Button x:Name="delbtn2" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click2"/>
+                        <Button x:Name="savbtn2" Grid.Column="4" Content="存檔(Save)" FontSize="35" Height="55"/>
+                        <Button x:Name="gupbtn2" Grid.Column="5" Content="放棄(Quit)" FontSize="35" Height="55"/>
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="員工資料">
+            <TabItem Header="員工資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,78" IsReadOnly="True"/>
+                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,519" IsReadOnly="True"/>
+                    <Grid Background="#FFDAD9D9" Margin="28,0,28,79" Height="430" VerticalAlignment="Bottom">
+                        <Grid.Resources>
+                            <Style x:Key="ScaledCheckBoxStyle" TargetType="CheckBox">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="4" ScaleY="4.2"/>
+                                        <!-- 放大为原来的两倍 -->
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid Margin="28,30,28,0"  VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="員工姓名:" FontSize="35" Height="65"/>
+                            <TextBox x:Name="txtname2" Grid.Column="1" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="4" Content=" 公司代號:" FontSize="35" Height="65"/>
+                            <ComboBox x:Name="txtcid2" Grid.Column="5" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="2" Content="職      稱:" FontSize="35" Height="65"/>
+                            <ComboBox x:Name="txtlevel" Grid.Column="3" FontSize="35" Height="65" IsEnabled="False"/>
+                        </Grid>
+                        <Grid Margin="28,105,28,0"  VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="電話(市) :" FontSize="35"/>
+                            <TextBox x:Name="txtphone2" Grid.Column="1" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="2" Content="電話(行):" FontSize="35"/>
+                            <TextBox x:Name="txtphone3" Grid.Column="3" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="4" Content="生 日:" FontSize="35"/>
+                            <TextBox x:Name="txtbday" Grid.Column="5" FontSize="35" Height="65" IsEnabled="False"/>
+                            <Label Grid.Column="6" Content="登記日期:" FontSize="35"/>
+                            <TextBox x:Name="txtfday" Grid.Column="7" FontSize="35" Height="65" IsEnabled="False"/>
+                        </Grid>
+                        <Grid VerticalAlignment="Top" Margin="28,186,28,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="住家地址:" FontSize="35" Grid.Column="0"/>
+                            <TextBox x:Name="txtaddress2" TextWrapping="Wrap" FontSize="35" Height="65" Width="1100" Grid.Column="1" IsEnabled="False"/>
+                            <Label Content="身分證ID:" FontSize="35" Grid.Column="2"/>
+                            <TextBox x:Name="txtID" TextWrapping="Wrap" FontSize="35" Height="65" Grid.Column="3" IsEnabled="False"/>
+                        </Grid>
+                        <Label Content="備       註:" HorizontalAlignment="Left" Margin="30,350,0,0" VerticalAlignment="Top" FontSize="35" Width="149"/>
+                        <TextBox Margin="184,342,28,22" TextWrapping="Wrap" FontSize="35" Height="65" IsEnabled="False"/>
+                        <Grid Margin="28,266,28,0"  VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="員工代號:" FontSize="35"/>
+                            <TextBox x:Name="txtmid2" Grid.Column="1" FontSize="35" IsEnabled="False"/>
+                            <Label Grid.Column="2" Content=" 員工啟用:" FontSize="35"/>
+                            <CheckBox x:Name="chken2" Grid.Column="3" Style="{StaticResource ScaledCheckBoxStyle}" Margin="0,0,720,40" IsEnabled="False" Width="15" Height="15"/>
+                        </Grid>
+                    </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="addbtn3" Grid.Column="0" Content="新增(Add)" FontSize="18" Height="55" Click="addbtn_Click3"/>
-                        <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="18" Height="55" Click="chgbtn_Click3"/>
-                        <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Sereach)" FontSize="18" Height="55" Click="srhbtn_Click3"/>
-                        <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="18" Height="55" Click="delbtn_Click3"/>
+                        <Button x:Name="addbtn3" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click3"/>
+                        <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click3"/>
+                        <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click3"/>
+                        <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click3"/>
+                        <Button x:Name="savbtn3" Grid.Column="4" Content="存檔(Save)" FontSize="35" Height="55"/>
+                        <Button x:Name="gupbtn3" Grid.Column="5" Content="放棄(Quit)" FontSize="35" Height="55"/>
                     </Grid>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Data Sereacher">
-                <Grid Background="#FFFF">
-                    <DataGrid x:Name="datagrid" Margin="28,28,28,91"/>
-                    <Button x:Name="startbtn1" Content="start" Margin="28,338,28,0" FontSize="22"  Height="38" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>
