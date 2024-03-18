@@ -20,6 +20,7 @@ using System.Reflection.PortableExecutable;
 using MySql.Data.MySqlClient;
 using System.Windows.Media.Effects;
 using System.ComponentModel;
+using System.Security.Cryptography;
 
 namespace MQTT
 {
@@ -41,11 +42,14 @@ namespace MQTT
         List<Member> members = new List<Member>();
         List<Machine> machines = new List<Machine>();
         List<Company> companies = new List<Company>();
+        List<String> companiesID = new List<String>();
         public void MySQLCreatelist()
         {
             machines.Clear();
             members.Clear();
             companies.Clear();
+            companiesID.Clear();
+            companiesID.Add("未選擇");
             comdatagrid.ItemsSource = null;
             machdatagrid.ItemsSource= null;
             memdatagrid.ItemsSource= null;
@@ -85,12 +89,16 @@ namespace MQTT
                         while (reader.Read())
                         {
                             companies.Add(new Company(reader.GetString("ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
+                            companiesID.Add(companies[companies.Count-1].Company_ID);
                         }
                     }
                 }
                 connection.Close();
             }
             comdatagrid.ItemsSource = companies;
+            txtcid1.ItemsSource=companiesID;
+            txtcid2.ItemsSource=companiesID;
+            txtcid3.ItemsSource=companiesID;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
@@ -263,7 +271,7 @@ namespace MQTT
 
         private void addbtn_Click2(object sender, RoutedEventArgs e)
         {
-            Addmachine newWindow2 = new Addmachine();
+            Addmachine newWindow2 = new Addmachine(this);
             newWindow2.Show();
         }
 

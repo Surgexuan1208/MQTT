@@ -20,12 +20,45 @@ namespace MQTT
     /// </summary>
     public partial class Addmachine : Window
     {
-        public Addmachine()
+        private MainWindow mainWindow;
+        public Addmachine(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
             this.WindowState = WindowState.Maximized;
+            Find();
         }
         List<string> comID = new List<string>();
+        List<string> macID = new List<string>();
+        private void Find()
+        {
+            comID.Clear();
+            comID.Add("未選擇");
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                // 在這裡執行資料庫操作
+                string sql = "SELECT * FROM company_info_db";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comID.Add(reader.GetString("ID"));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            txtcid.ItemsSource = comID;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string database = "company_db";
@@ -34,35 +67,32 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (txtcid.Text.Length > 0 && txtmid.Text.Length > 0 && txtdes.Text.Length > 0)
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                    // 在這裡執行資料庫操作
+                string sql = "SELECT * FROM machine_db";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                 {
-                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                    // 在這裡執行資料庫操作
-                    string sql = "SELECT * FROM company_info_db";
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                comID.Add(reader.GetString("ID"));
-                            }
+                            macID.Add(reader.GetString("Machine_ID"));
                         }
                     }
-                    connection.Close();
                 }
-                var foundItems = comID.Where(item => item.Contains(txtcid.Text)).ToList();
-                if (!foundItems.Any())
-                {
-                    MessageBox.Show("ID不存在");
-                    return;
-                }
+                connection.Close();
             }
-            else
+            var foundItems = macID.Where(item => item.Contains(txtmid.Text)).ToList();
+            if (foundItems.Any())
             {
-                MessageBox.Show("資料不能有空");
+                MessageBox.Show("ID已存在");
+                return;
+            }
+            if (txtcid.SelectedIndex == 0 && txtmid.Text.Length > 0 && txtdes.Text.Length > 0)
+            {
+                MessageBox.Show("資料不能未選擇或為空");
                 return;
             }
             MessageBoxResult result = MessageBox.Show("確定要上傳嗎?", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -85,6 +115,7 @@ namespace MQTT
                     connection.Close();
                 }
                 this.Close();
+                mainWindow.MySQLCreatelist();
             }
             else
             {

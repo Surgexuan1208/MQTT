@@ -59,7 +59,7 @@
                             <Label Content="部     門     名     稱 :" FontSize="35" Height="65" Grid.Column="0"/>
                             <TextBox x:Name="txtname" FontSize="35" Height="65" Grid.Column="1"/>
                             <Label Content="部     門     代     號:" FontSize="35" Height="65" Width="288" Grid.Column="2"/>
-                            <TextBox x:Name="txtid" FontSize="35" Height="65" Grid.Column="3"/>
+                            <ComboBox x:Name="txtcid1" FontSize="35" Height="65" Grid.Column="3" SelectedIndex="0"/>
                         </Grid>
                         <Label Content="部     門     電     話 :" HorizontalAlignment="Left" Margin="0,0,0,40" FontSize="35" Width="298" Height="54" VerticalAlignment="Bottom"/>
                         <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="303,135,0,0" TextWrapping="Wrap" Width="500" FontSize="35" Height="65" VerticalAlignment="Top"/>
@@ -104,7 +104,7 @@
                             <Label Grid.Column="0" Content="機     器     代     號 :" FontSize="35" Height="65" Width="300"/>
                             <TextBox x:Name="txtmid" Grid.Column="1" FontSize="35" Height="65" Width="400"/>
                             <Label Grid.Column="2" Content="部     門     代     號 :" FontSize="35" Height="65" Width="300"/>
-                            <ComboBox x:Name="txtcid" Grid.Column="3" FontSize="35" Height="65" Width="400"/>
+                            <ComboBox x:Name="txtcid2" Grid.Column="3" FontSize="35" Height="65" Width="400" SelectedIndex="0"/>
                         </Grid>
                         <Label Content="機器是否啟用:" HorizontalAlignment="Left" Margin="30,275,0,0" FontSize="35" Height="54" VerticalAlignment="Top"/>
                         <CheckBox x:Name="chken" Style="{StaticResource ScaledCheckBoxStyle}" Content="" HorizontalAlignment="Left" Margin="262,274,0,0" IsChecked="False" Height="32" VerticalAlignment="Top" IsEnabled="False"/>
@@ -149,7 +149,7 @@
                             <Label Grid.Column="2" Content=" 員     工     姓     名:" FontSize="35" Height="65" Width="300"/>
                             <TextBox x:Name="txtname2" Grid.Column="3" FontSize="35" Height="65" Width="400"/>
                             <Label Grid.Column="0" Content=" 部     門     代     號:" FontSize="35" Height="65" Width="300"/>
-                            <ComboBox x:Name="txtcid2" Grid.Column="1" FontSize="35" Height="65" Width="400"/>
+                            <ComboBox x:Name="txtcid3" Grid.Column="1" FontSize="35" Height="65" Width="400" SelectedIndex="0"/>
                         </Grid>
                         <Grid Margin="28,87,28,0"  VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
@@ -173,7 +173,7 @@
                             <Label Grid.Column="0" Content=" 員     工    代     號 :" FontSize="35" Width="300"/>
                             <TextBox x:Name="txtmid2" Grid.Column="1" FontSize="35" Width="400"/>
                             <Label Grid.Column="2" Content=" 卡     片     代     號:" FontSize="35" Width="300"/>
-                            <TextBox x:Name="txtcid3" Grid.Column="3" FontSize="35" Width="400"/>
+                            <TextBox x:Name="txtcarid" Grid.Column="3" FontSize="35" Width="400"/>
                         </Grid>
                     </Grid>
                     <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
