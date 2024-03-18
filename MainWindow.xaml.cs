@@ -66,7 +66,7 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            members.Add(new Member(reader.GetString("Company_ID"), reader.GetString("Card_ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("First_Day"), reader.GetString("Birth_Day"), reader.GetBoolean("Effect")));
+                            members.Add(new Member(reader.GetString("Company_ID"), reader.GetString("Card_ID"), reader.GetString("Member_ID"), reader.GetString("Name"), reader.GetString("ID") , reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("Homephone"), reader.GetString("First_Day"), reader.GetString("Birth_Day"), reader.GetBoolean("Effect")));
                         }
                     }
                 }
@@ -117,7 +117,7 @@ namespace MQTT
             dataGrid.CellStyle = cellStyle;
         }
         static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        /*private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Topic.Text.Length <1 ||Topic.Text.Length==0)
             {
@@ -153,9 +153,9 @@ namespace MQTT
             {
                 MessageBox.Show($"錯誤：{ex.Message}");
             }
-        }*/
+        }
         // 斷開連接
-        /*private async void StopButton_Click(object sender, EventArgs e)
+        private async void StopButton_Click(object sender, EventArgs e)
         {
             cancellationTokenSource.Cancel();
             stopbtn.IsEnabled = false;
@@ -177,7 +177,7 @@ namespace MQTT
             startbtn.IsEnabled = true;
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
 
-        }*/
+        }
         private void addbtn_Click1(object sender, RoutedEventArgs e)
         {
             Addcom newWindow1 = new Addcom(this);
@@ -188,7 +188,7 @@ namespace MQTT
         {
             if (comdatagrid.SelectedIndex >= 0 && comdatagrid.SelectedIndex < companies.Count)
             {
-                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex],this);
+                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex].Company_ID,this);
                 newWindow4.Show();
             }else{
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
@@ -279,7 +279,64 @@ namespace MQTT
 
         private void delbtn_Click2(object sender, RoutedEventArgs e)
         {
+            if (machdatagrid.SelectedIndex >= 0 && machdatagrid.SelectedIndex < machines.Count)
+            {
 
+            }
+            else
+            {                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+                return;
+            }
+            MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                result = MessageBox.Show("確定要刪除嗎?(1次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    result = MessageBox.Show("確定要刪除嗎?(2次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        result = MessageBox.Show("確定要刪除嗎?(3次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            string database = "company_db";
+                            string databaseServer = "220.132.141.9";
+                            string databasePort = "6833";
+                            string databaseUser = "root";
+                            string databasePassword = "edys1234";
+                            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+                            using (MySqlConnection connection = new MySqlConnection(connectionString))
+                            {
+                                connection.Open();
+                                string deleteSql = "DELETE FROM machine_db WHERE Machine_ID = @i";
+                                using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
+                                {
+                                    deleteCommand.Parameters.AddWithValue("@i", machines[machdatagrid.SelectedIndex].Machine_ID);
+                                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                }
+                            }
+                            MySQLCreatelist();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void addbtn_Click3(object sender, RoutedEventArgs e)
@@ -300,14 +357,65 @@ namespace MQTT
 
         private void delbtn_Click3(object sender, RoutedEventArgs e)
         {
+            if (memdatagrid.SelectedIndex >= 0 && memdatagrid.SelectedIndex < members.Count)
+            {
 
+            }
+            else
+            {                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+                return;
+            }
+            MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                result = MessageBox.Show("確定要刪除嗎?(1次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    result = MessageBox.Show("確定要刪除嗎?(2次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        result = MessageBox.Show("確定要刪除嗎?(3次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            string database = "company_db";
+                            string databaseServer = "220.132.141.9";
+                            string databasePort = "6833";
+                            string databaseUser = "root";
+                            string databasePassword = "edys1234";
+                            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+                            using (MySqlConnection connection = new MySqlConnection(connectionString))
+                            {
+                                connection.Open();
+                                string deleteSql = "DELETE FROM member_db WHERE Member_ID = @i";
+                                using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
+                                {
+                                    deleteCommand.Parameters.AddWithValue("@i", members[memdatagrid.SelectedIndex].Member_ID);
+                                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+                                }
+                            }
+                            MySQLCreatelist();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -319,6 +427,11 @@ namespace MQTT
         }
 
         private void savbtn_Click1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

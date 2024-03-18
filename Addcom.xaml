@@ -28,7 +28,7 @@
             <TextBox x:Name="txtid" Grid.Column="3" FontSize="35" Height="65"/>
         </Grid>
         <Label Content="部門電話:" HorizontalAlignment="Left" Margin="30,125,0,0" VerticalAlignment="Top" FontSize="35"/>
-        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="188,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontSize="35" Height="65"/>
+        <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="188,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontSize="35" Height="65" MaxLength="11"/>
         <Label Content="備        註:" HorizontalAlignment="Left" Margin="24,0,0,413" FontSize="35" Width="158" Height="65" VerticalAlignment="Bottom"/>
         <TextBox Margin="187,275,28,100" TextWrapping="Wrap" FontSize="24"/>
         <Label Content="部門地址:" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" FontSize="35"/>

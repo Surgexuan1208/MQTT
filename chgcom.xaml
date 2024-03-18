@@ -30,7 +30,7 @@
         <Label Content="部門電話:" HorizontalAlignment="Left" Margin="30,125,0,0" VerticalAlignment="Top" FontSize="35"/>
         <TextBox x:Name="txtphone" HorizontalAlignment="Left" Margin="188,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontSize="35" Height="65"/>
         <Label Content="備        註:" HorizontalAlignment="Left" Margin="30,0,0,455" FontSize="35" Width="158" Height="65" VerticalAlignment="Bottom"/>
-        <TextBox Margin="187,275,28,76" TextWrapping="Wrap" FontSize="24"/>
+        <TextBox Margin="187,275,28,100" TextWrapping="Wrap" FontSize="24"/>
         <Label Content="部門地址:" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" FontSize="35"/>
         <TextBox x:Name="txtaddress" Margin="187,197,28,0" TextWrapping="Wrap" FontSize="35" Height="65" VerticalAlignment="Top"/>
     </Grid>
