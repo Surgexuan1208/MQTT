@@ -26,6 +26,7 @@ namespace MQTT
         public Addmember()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
         }
         List<string> comID = new List<string>();
         Dictionary<string, List<string>> members = new Dictionary<string, List<string>>();
@@ -59,7 +60,7 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (txtname.Text.Length>0&&txtcid.Text.Length>0&&txtlevel.Text.Length>0&&txtphone.Text.Length>0&&txtbday.Text.Length>0&&txtfday.Text.Length>0&&txtaddress.Text.Length>0)
+            if (txtname.Text.Length>0&&txtcid.Text.Length>0&&txtlevel.Text.Length>0&&txtbday.Text.Length>0&&txtfday.Text.Length>0&&txtaddress.Text.Length>0)
             {
                 if (txtmid.Text.Length!=4)
                 {
@@ -131,7 +132,7 @@ namespace MQTT
                         insertCommand.Parameters.AddWithValue("@carid",txtmid.Text);
                         insertCommand.Parameters.AddWithValue("@n", txtname.Text);
                         insertCommand.Parameters.AddWithValue("@a", txtaddress.Text);
-                        insertCommand.Parameters.AddWithValue("@c", txtphone.Text);
+                        insertCommand.Parameters.AddWithValue("@c", txtphone1.Text);
                         insertCommand.Parameters.AddWithValue("@f", txtfday.Text);
                         insertCommand.Parameters.AddWithValue("@b", txtbday.Text);
                         insertCommand.Parameters.AddWithValue("@e", chken.IsChecked);
@@ -157,20 +158,6 @@ namespace MQTT
             {
                 return;
             }
-        }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (txtmid.IsEnabled)
-            {
-                txtmid.IsEnabled = false;
-                editmid.Content = "開啟";
-
-            }
-            else { 
-                txtmid.IsEnabled = true;
-                editmid.Content = "關閉";
-            }
-            
         }
     }
 }
