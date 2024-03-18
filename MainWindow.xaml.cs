@@ -188,16 +188,16 @@ namespace MQTT
         }
         private void addbtn_Click1(object sender, RoutedEventArgs e)
         {
-            Addcom newWindow1 = new Addcom(this);
-            newWindow1.Show();
+            Addcom newWindow = new Addcom(this);
+            newWindow.Show();
         }
 
         private void chgbtn_Click1(object sender, RoutedEventArgs e)
         {
             if (comdatagrid.SelectedIndex >= 0 && comdatagrid.SelectedIndex < companies.Count)
             {
-                chgcom newWindow4 = new chgcom(companies[comdatagrid.SelectedIndex].Company_ID,this);
-                newWindow4.Show();
+                chgcom newWindow = new chgcom(companies[comdatagrid.SelectedIndex].Company_ID,this);
+                newWindow.Show();
             }else{
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
                 MessageBox.Show("Please select a valid item from the list.");
@@ -271,13 +271,23 @@ namespace MQTT
 
         private void addbtn_Click2(object sender, RoutedEventArgs e)
         {
-            Addmachine newWindow2 = new Addmachine(this);
-            newWindow2.Show();
+            Addmachine newWindow = new Addmachine(this);
+            newWindow.Show();
         }
 
         private void chgbtn_Click2(object sender, RoutedEventArgs e)
         {
-
+            if (machdatagrid.SelectedIndex >= 0 && machdatagrid.SelectedIndex < machines.Count)
+            {
+                chgmachine newWindow = new chgmachine(machines[machdatagrid.SelectedIndex].Machine_ID, this);
+                newWindow.Show();
+            }
+            else
+            {
+                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+            }
+            
         }
 
         private void srhbtn_Click2(object sender, RoutedEventArgs e)
