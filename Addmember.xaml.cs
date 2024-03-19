@@ -23,23 +23,83 @@ namespace MQTT
     /// </summary>
     public partial class Addmember : Window
     {
-        public Addmember()
+        private MainWindow mainWindow;
+        public Addmember(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
             this.WindowState = WindowState.Maximized;
+            Find();
+            Createlevel();
         }
         List<string> comID = new List<string>();
         Dictionary<string, List<string>> members = new Dictionary<string, List<string>>();
-        static void AddEmployee(Dictionary<string, List<string>> companies, string code, string companyKey, string employee)
+        List<string> level = new List<string>();
+        List<string> carID = new List<string>();
+        private void Createlevel()
         {
-            string key = $"{companyKey}";
-
-            if (!companies.ContainsKey(key))
+            level.Add("未選擇");
+            level.Add("老闆");
+            level.Add("主管");
+            level.Add("員工");
+            txtlevel.ItemsSource = level;
+        }
+        private void Find()
+        {
+            comID.Clear();
+            comID.Add("未選擇");
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                companies[key] = new List<string>();
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                // 在這裡執行資料庫操作
+                string sql = "SELECT * FROM company_info_db";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comID.Add(reader.GetString("ID"));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            txtcid.ItemsSource = comID;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                // 在這裡執行資料庫操作
+                string sql = "SELECT * FROM member_db";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            carID.Add(reader.GetString("Card_ID"));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+        }
+        static void AddEmployee(Dictionary<string, List<string>> members, string code, string memberKey, string employee)
+        {
+            string key = $"{memberKey}";
+
+            if (!members.ContainsKey(key))
+            {
+                members[key] = new List<string>();
             }
 
-            companies[key].Add(employee);
+            members[key].Add(employee);
         }
         static bool CheckExistence(Dictionary<string, List<string>> dictionary, string key, string value)
         {
@@ -60,34 +120,17 @@ namespace MQTT
             string databaseUser = "root";
             string databasePassword = "edys1234";
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            if (txtname.Text.Length>0&&txtcid.Text.Length>0&&txtlevel.Text.Length>0&&txtbday.Text.Length>0&&txtfday.Text.Length>0&&txtaddress.Text.Length>0)
+            if (txtcaid.Text.Length>0&&txtname.Text.Length>0&&txtcid.SelectedIndex!=0&&txtlevel.SelectedIndex!=0&&txtbday.Text.Length>0&&txtfday.Text.Length>0&&txtaddress.Text.Length>0)
             {
+                var foundItems1 = carID.Where(item => item.Contains(txtcaid.Text)).ToList();
+                if (foundItems1.Any())
+                {
+                    MessageBox.Show($"卡片ID {txtcaid.Text} 已存在");
+                    return;
+                }
                 if (txtmid.Text.Length!=4)
                 {
                     MessageBox.Show("員工代號必須為4碼");
-                    return;
-                }
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                    // 在這裡執行資料庫操作
-                    string sql = "SELECT * FROM company_info_db";
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                comID.Add(reader.GetString("ID"));
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-                var foundItems1 = comID.Where(item => item.Contains(txtcid.Text)).ToList();
-                if (!foundItems1.Any())
-                {
-                    MessageBox.Show($"公司ID {txtcid.Text} 不存在");
                     return;
                 }
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -101,16 +144,15 @@ namespace MQTT
                         {
                             while (reader.Read())
                             {
-                                AddEmployee(members, reader.GetString("Card_ID"), reader.GetString("Company_ID"), reader.GetString("Card_ID"));
+                                AddEmployee(members, reader.GetString("Member_ID"), reader.GetString("Company_ID"), reader.GetString("Member_ID"));
                             }
                         }
                     }
                     connection.Close();
                 }
-
-                if (CheckExistence(members,txtcid.Text,txtmid.Text))
+                if (CheckExistence(members,comID[txtcid.SelectedIndex],txtmid.Text))
                 {
-                    MessageBox.Show($"公司 {txtcid.Text} 中，員工ID {txtmid.Text} 已存在");
+                    MessageBox.Show($"公司 {comID[txtcid.SelectedIndex]} 中，員工ID {txtmid.Text} 已存在");
                     return;
                 }
             }
@@ -125,14 +167,18 @@ namespace MQTT
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string insertSql = "INSERT INTO member_db (Company_ID, Card_ID, Name, Address, Cellphone, First_Day, Birth_Day, Effect) VALUES (@comid, @carid, @n, @a, @c, @f, @b, @e)";
+                    string insertSql = "INSERT INTO member_db (Company_ID, Card_ID, Member_ID, Name, Level, ID, Address, Cellphone, Homephone, First_Day, Birth_Day, Effect) VALUES (@comid, @cardid, @m, @n, @l, @i, @a, @c, @h, @f, @b, @e)";
                     using (MySqlCommand insertCommand = new MySqlCommand(insertSql, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@comid",txtcid.Text);
-                        insertCommand.Parameters.AddWithValue("@carid",txtmid.Text);
+                        insertCommand.Parameters.AddWithValue("@comid",comID[txtcid.SelectedIndex]);
+                        insertCommand.Parameters.AddWithValue("@cardid",txtcaid.Text);
+                        insertCommand.Parameters.AddWithValue("@m", txtmid.Text);
                         insertCommand.Parameters.AddWithValue("@n", txtname.Text);
+                        insertCommand.Parameters.AddWithValue("@l", level[txtlevel.SelectedIndex]);
+                        insertCommand.Parameters.AddWithValue("@i", txtid.Text);
                         insertCommand.Parameters.AddWithValue("@a", txtaddress.Text);
                         insertCommand.Parameters.AddWithValue("@c", txtphone1.Text);
+                        insertCommand.Parameters.AddWithValue("@h", txtphone2.Text);
                         insertCommand.Parameters.AddWithValue("@f", txtfday.Text);
                         insertCommand.Parameters.AddWithValue("@b", txtbday.Text);
                         insertCommand.Parameters.AddWithValue("@e", chken.IsChecked);
@@ -140,6 +186,7 @@ namespace MQTT
                     }
                     connection.Close();
                 }
+                mainWindow.MySQLCreatelist();
                 this.Close();
             }
             else

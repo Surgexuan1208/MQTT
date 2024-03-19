@@ -121,7 +121,7 @@
                         <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click2"/>
                         <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click2"/>
                         <Button x:Name="delbtn2" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click2"/>
-                        <Button x:Name="qitbtn2" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55"/>
+                        <Button x:Name="qitbtn2" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn2_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -188,7 +188,7 @@
                         <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click3"/>
                         <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click3"/>
                         <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click3"/>
-                        <Button x:Name="qitbtn3" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55"/>
+                        <Button x:Name="qitbtn3" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn3_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>

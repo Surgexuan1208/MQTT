@@ -53,6 +53,9 @@ namespace MQTT
             comdatagrid.ItemsSource = null;
             machdatagrid.ItemsSource= null;
             memdatagrid.ItemsSource= null;
+            txtcid1.ItemsSource = null;
+            txtcid2.ItemsSource = null;
+            txtcid3.ItemsSource = null;
             string database = "company_db";
             string databaseServer = "220.132.141.9";
             string databasePort = "6833";
@@ -70,7 +73,7 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            members.Add(new Member(reader.GetString("Company_ID"), reader.GetString("Card_ID"), reader.GetString("Member_ID"), reader.GetString("Name"), reader.GetString("ID") , reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("Homephone"), reader.GetString("First_Day"), reader.GetString("Birth_Day"), reader.GetBoolean("Effect")));
+                            members.Add(new Member(reader.GetString("Company_ID"), reader.GetString("Card_ID"), reader.GetString("Member_ID"), reader.GetString("Name"), reader.GetString("Level"), reader.GetString("ID") , reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("Homephone"), reader.GetString("First_Day"), reader.GetString("Birth_Day"), reader.GetBoolean("Effect")));
                         }
                     }
                 }
@@ -99,6 +102,9 @@ namespace MQTT
             txtcid1.ItemsSource=companiesID;
             txtcid2.ItemsSource=companiesID;
             txtcid3.ItemsSource=companiesID;
+            txtcid1.SelectedIndex = 0;
+            txtcid2.SelectedIndex = 0;
+            txtcid3.SelectedIndex = 0;
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
@@ -359,13 +365,22 @@ namespace MQTT
 
         private void addbtn_Click3(object sender, RoutedEventArgs e)
         {
-            Addmember newWindow3 = new Addmember();
+            Addmember newWindow3 = new Addmember(this);
             newWindow3.Show();
         }
 
         private void chgbtn_Click3(object sender, RoutedEventArgs e)
         {
-
+            if (memdatagrid.SelectedIndex >= 0 && memdatagrid.SelectedIndex < members.Count)
+            {
+                chgmember newWindow = new chgmember(members[memdatagrid.SelectedIndex].Card_ID, this);
+                newWindow.Show();
+            }
+            else
+            {
+                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
+                MessageBox.Show("Please select a valid item from the list.");
+            }
         }
 
         private void srhbtn_Click3(object sender, RoutedEventArgs e)
@@ -434,24 +449,25 @@ namespace MQTT
                 return;
             }
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void qitbtn_Click1(object sender, RoutedEventArgs e)
         {
             comdatagrid.UnselectAll();
         }
 
-        private void savbtn_Click1(object sender, RoutedEventArgs e)
+        private void StartButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private void qitbtn2_Click(object sender, RoutedEventArgs e)
         {
+            machdatagrid.UnselectAll();
+        }
 
+        private void qitbtn3_Click(object sender, RoutedEventArgs e)
+        {
+            memdatagrid.UnselectAll();
         }
     }
 }

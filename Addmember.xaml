@@ -39,9 +39,9 @@
             <Label Grid.Column="0" Content="員工姓名:" FontSize="35" Height="55"/>
             <TextBox x:Name="txtname" Grid.Column="1" FontSize="35" Height="65"/>
             <Label Grid.Column="2" Content=" 公司代號:" FontSize="35" Height="55"/>
-            <ComboBox x:Name="txtcid" Grid.Column="3" FontSize="35" Height="65"/>
+            <ComboBox x:Name="txtcid" Grid.Column="3" FontSize="35" Height="65" SelectedIndex="0"/>
             <Label Grid.Column="4" Content="職      稱:" FontSize="35" Height="55"/>
-            <ComboBox x:Name="txtlevel" Grid.Column="5" FontSize="35" Height="65"/>
+            <ComboBox x:Name="txtlevel" Grid.Column="5" FontSize="35" Height="65" SelectedIndex="0"/>
             <Label Grid.Column="6" Content="身分證:" FontSize="35" Height="55"/>
             <TextBox x:Name="txtid" Grid.Column="7" FontSize="35" Height="65"/>
         </Grid>
