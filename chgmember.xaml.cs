@@ -23,6 +23,8 @@ namespace MQTT
     {
         Member m;
         public string originID;
+        public string originCom;
+        public string originmID;
         public int mode;
         private MainWindow mainWindow;
         List<string> comID = new List<string>();
@@ -49,6 +51,8 @@ namespace MQTT
             txtphone2.Text = m.Homephone;
             chken.IsChecked = m.Effect;
             originID = m.Card_ID;
+            originCom = m.Company_ID;
+            originmID = m.Member_ID;
             mode = 0;
             this.mainWindow = mainWindow;
             this.WindowState = WindowState.Maximized;
@@ -203,28 +207,32 @@ namespace MQTT
                 MessageBox.Show("資料不能有空");
                 return;
             }
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            if(originCom != comID[txtcid.SelectedIndex] || originmID != txtmid.Text)
             {
-                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                                    // 在這裡執行資料庫操作
-                string sql = "SELECT * FROM member_db";
-                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                        // 在這裡執行資料庫操作
+                    string sql = "SELECT * FROM member_db";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        while (reader.Read())
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            AddEmployee(members, reader.GetString("Member_ID"), reader.GetString("Company_ID"), reader.GetString("Member_ID"));
+                            while (reader.Read())
+                            {
+                                AddEmployee(members, reader.GetString("Member_ID"), reader.GetString("Company_ID"), reader.GetString("Member_ID"));
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+                if (CheckExistence(members, comID[txtcid.SelectedIndex], txtmid.Text))
+                {
+                    MessageBox.Show($"公司 {comID[txtcid.SelectedIndex]} 中，員工ID {txtmid.Text} 已存在");
+                    return;
+                }
             }
-            if (CheckExistence(members, comID[txtcid.SelectedIndex], txtmid.Text))
-            {
-                MessageBox.Show($"公司 {comID[txtcid.SelectedIndex]} 中，員工ID {txtmid.Text} 已存在");
-                return;
-            }
+            
             MessageBoxResult result = MessageBox.Show("確定要更改嗎?", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
