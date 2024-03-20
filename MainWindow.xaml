@@ -47,15 +47,15 @@
             </TabItem>
             <TabItem Header="部門資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="comdatagrid" Margin="26,28,30,350" IsReadOnly="True" AlternatingRowBackground="LightGray">
+                    <DataGrid x:Name="comdatagrid" Margin="26,28,30,350" IsReadOnly="True" AlternatingRowBackground="Pink">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="35"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <StackPanel Margin="26,0,1359,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
-                        <RadioButton Content="以公司排列" GroupName="Options1" Checked="RadioButton1_Checked" IsChecked="True" Tag="1">
+                    <StackPanel Margin="26,0,1273,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
+                        <RadioButton Content="以部門編號排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="1">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -63,7 +63,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以名字排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="2">
+                        <RadioButton Content="以部門名字排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="2">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -71,7 +71,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以地址排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="3">
+                        <RadioButton Content="以部門地址排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="3">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -114,15 +114,15 @@
             </TabItem>
             <TabItem Header="逼卡機資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,225" IsReadOnly="True">
+                    <DataGrid x:Name="machdatagrid" Margin="28,28,28,225" IsReadOnly="True" AlternatingRowBackground="Pink">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="35"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <StackPanel Margin="26,0,1359,185" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
-                        <RadioButton Content="以公司排列" GroupName="Options2" Checked="RadioButton2_Checked" IsChecked="True" Tag="1">
+                    <StackPanel Margin="26,0,1273,185" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
+                        <RadioButton Content="以部門編號排列" GroupName="Options2" Checked="RadioButton2_Checked" Tag="1">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -130,7 +130,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以名字排列" GroupName="Options2" Checked="RadioButton2_Checked" Tag="2">
+                        <RadioButton Content="以機器編號排列" GroupName="Options2" Checked="RadioButton2_Checked" Tag="2">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -138,7 +138,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以地址排列" GroupName="Options2" Checked="RadioButton2_Checked" Tag="3">
+                        <RadioButton Content="以機器狀態排列" GroupName="Options2" Checked="RadioButton2_Checked" Tag="3">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -191,15 +191,15 @@
             </TabItem>
             <TabItem Header="員工資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,350" IsReadOnly="True">
+                    <DataGrid x:Name="memdatagrid" Margin="28,28,28,350" IsReadOnly="True" AlternatingRowBackground="Pink">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="35"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <StackPanel Margin="26,0,1359,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
-                        <RadioButton Content="以公司排列" GroupName="Options3" Checked="RadioButton3_Checked" IsChecked="True" Tag="1">
+                    <StackPanel Margin="26,0,1273,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
+                        <RadioButton Content="以部門編號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="1">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -207,7 +207,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以名字排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="2">
+                        <RadioButton Content="以卡片代號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="2">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -215,7 +215,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Content="以地址排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="3">
+                        <RadioButton Content="以員工編號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="3">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="VerticalContentAlignment" Value="Center"/>

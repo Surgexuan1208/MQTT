@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="機       器       代       號:" FontSize="35" Height="65"/>
             <TextBox x:Name="txtmid" Grid.Column="1" FontSize="35" Height="65"/>
-            <Label Grid.Column="2" Content="公       司       代       號:" FontSize="35" Height="65"/>
+            <Label Grid.Column="2" Content="部       門       代       號:" FontSize="35" Height="65"/>
             <ComboBox x:Name="txtcid" Grid.Column="3" FontSize="35" Height="65"/>
         </Grid>
         <Label Content="機器是否啟用:" HorizontalAlignment="Left" Margin="30,150,0,0" VerticalAlignment="Top" FontSize="35"/>

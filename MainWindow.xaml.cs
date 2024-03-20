@@ -600,10 +600,10 @@ namespace MQTT
                             using (MySqlConnection connection = new MySqlConnection(connectionString))
                             {
                                 connection.Open();
-                                string deleteSql = "DELETE FROM member_db WHERE Member_ID = @i";
+                                string deleteSql = "DELETE FROM member_db WHERE Card_ID = @i";
                                 using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
                                 {
-                                    deleteCommand.Parameters.AddWithValue("@i", members[memdatagrid.SelectedIndex].Member_ID);
+                                    deleteCommand.Parameters.AddWithValue("@i", members[memdatagrid.SelectedIndex].Card_ID);
                                     int rowsAffected = deleteCommand.ExecuteNonQuery();
                                 }
                             }
@@ -650,35 +650,65 @@ namespace MQTT
 
         private void RadioButton3_Checked(object sender, RoutedEventArgs e)
         {
-
+            var targetbutton = sender as RadioButton;
+            memdatagrid.ItemsSource = null;
+            string mode = targetbutton.Tag.ToString();
+            // 检查选中的 RadioButton 的 Tag 属性
+            switch (mode)
+            {
+                case "1":
+                    members = members.OrderBy(p => p.Company_ID).ToList();
+                    break;
+                case "2":
+                    members = members.OrderBy(p => p.Card_ID).ToList();
+                    break;
+                case "3":
+                    members = members.OrderBy(p => p.Member_ID).ToList();
+                    break;
+            }
+            memdatagrid.ItemsSource = members;
         }
 
         private void RadioButton2_Checked(object sender, RoutedEventArgs e)
         {
-
+            var targetbutton = sender as RadioButton;
+            machdatagrid.ItemsSource = null;
+            string mode = targetbutton.Tag.ToString();
+            // 检查选中的 RadioButton 的 Tag 属性
+            switch (mode)
+            {
+                case "1":
+                    machines = machines.OrderBy(p => p.Company_ID).ToList();
+                    break;
+                case "2":
+                    machines = machines.OrderBy(p => p.Machine_ID).ToList();
+                    break;
+                case "3":
+                    machines = machines.OrderBy(p => p.Status).ToList();
+                    break;
+            }
+            machdatagrid.ItemsSource = machines;
         }
 
         private void RadioButton1_Checked(object sender, RoutedEventArgs e)
         {
-            /*RadioButton radioButton = sender as RadioButton;
+            var targetbutton = sender as RadioButton;
             comdatagrid.ItemsSource = null;
-            if ()
+            string mode = targetbutton.Tag.ToString();
+            // 检查选中的 RadioButton 的 Tag 属性
+            switch (mode)
             {
-                // 检查选中的 RadioButton 的 Tag 属性
-                switch (radioButton.Tag.ToString())
-                {
-                    case "1":
-                        companies = companies.OrderBy(p => p.Company_ID).ToList();
-                        break;
-                    case "2":
-                        companies = companies.OrderBy(p => p.Name).ToList();
-                        break;
-                    case "3":
-                        companies = companies.OrderBy(p => p.Address).ToList();
-                        break;
-                }
+                case "1":
+                    companies = companies.OrderBy(p => p.Company_ID).ToList();
+                    break;
+                case "2":
+                    companies = companies.OrderBy(p => p.Name).ToList();
+                    break;
+                case "3":
+                    companies = companies.OrderBy(p => p.Address).ToList();
+                    break;
             }
-            comdatagrid.ItemsSource = companies;*/
+            comdatagrid.ItemsSource = companies;
         }
     }
 }
