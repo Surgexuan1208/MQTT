@@ -177,8 +177,8 @@ namespace MQTT
                         insertCommand.Parameters.AddWithValue("@l", level[txtlevel.SelectedIndex]);
                         insertCommand.Parameters.AddWithValue("@i", txtid.Text);
                         insertCommand.Parameters.AddWithValue("@a", txtaddress.Text);
-                        insertCommand.Parameters.AddWithValue("@c", txtphone1.Text);
-                        insertCommand.Parameters.AddWithValue("@h", txtphone2.Text);
+                        insertCommand.Parameters.AddWithValue("@c", txtphone2.Text);
+                        insertCommand.Parameters.AddWithValue("@h", txtphone1.Text);
                         insertCommand.Parameters.AddWithValue("@f", txtfday.Text);
                         insertCommand.Parameters.AddWithValue("@b", txtbday.Text);
                         insertCommand.Parameters.AddWithValue("@e", chken.IsChecked);

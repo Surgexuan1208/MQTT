@@ -206,7 +206,7 @@ namespace MQTT
                 newWindow.Show();
             }else{
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目", "未選取");
             }
         }
 
@@ -221,7 +221,7 @@ namespace MQTT
             {
 
             }else{                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目", "未選取");
                 return;
             }
             MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -291,14 +291,70 @@ namespace MQTT
             else
             {
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目","未選取");
             }
             
         }
 
         private void srhbtn_Click2(object sender, RoutedEventArgs e)
         {
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            machdatagrid.ItemsSource = null;
+            machines.Clear();
 
+            if (txtcid2.SelectedIndex==0)
+            {
+                if (txtmid.Text.Length>0)
+                {
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                            // 在這裡執行資料庫操作
+                        string sql = $"SELECT * FROM machine_db WHERE Machine_ID = '{txtmid.Text}'";
+                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        {
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    machines.Add(new Machine(reader.GetString("Company_ID"), reader.GetString("Machine_ID"), reader.GetString("Machine_Location"), reader.GetString("Status"), reader.GetBoolean("Effect")));
+                                }
+                            }
+                        }
+                        connection.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("您未輸入任何查詢值");
+                }
+            }
+            else
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                        // 在這裡執行資料庫操作
+                    string sql = $"SELECT * FROM machine_db WHERE Company_ID = '{companiesID[txtcid2.SelectedIndex]}'";
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                machines.Add(new Machine(reader.GetString("Company_ID"), reader.GetString("Machine_ID"), reader.GetString("Machine_Location"), reader.GetString("Status"), reader.GetBoolean("Effect")));
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            machdatagrid.ItemsSource = machines;
         }
 
         private void delbtn_Click2(object sender, RoutedEventArgs e)
@@ -309,7 +365,7 @@ namespace MQTT
             }
             else
             {                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目", "未選取");
                 return;
             }
             MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -379,7 +435,7 @@ namespace MQTT
             else
             {
                 // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目", "未選取");
             }
         }
 
@@ -396,7 +452,7 @@ namespace MQTT
             }
             else
             {                // 在這裡處理索引無效的情況，例如顯示錯誤訊息或採取其他措施
-                MessageBox.Show("Please select a valid item from the list.");
+                MessageBox.Show("請選擇清單內的項目", "未選取");
                 return;
             }
             MessageBoxResult result = MessageBox.Show("確定要刪除嗎?(接下來請再確認三次)", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);

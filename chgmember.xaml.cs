@@ -47,8 +47,8 @@ namespace MQTT
             txtlevel.SelectedItem = m.Level;
             txtmid.Text = m.Member_ID;
             txtname.Text = m.Name;
-            txtphone1.Text = m.Cellphone;
-            txtphone2.Text = m.Homephone;
+            txtphone1.Text = m.Homephone;
+            txtphone2.Text = m.Cellphone;
             chken.IsChecked = m.Effect;
             originID = m.Card_ID;
             originCom = m.Company_ID;

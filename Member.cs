@@ -21,7 +21,7 @@ namespace MQTT
         public string FirstDay { get; set; }
         public string BirthDay { get; set; }
         public bool Effect { get; set; }
-        public Member(string coi,string cai,String m,string n,string l,string i, string a,string c,string h,string fd,string bd,bool e)
+        public Member(string coi,string cai,string m,string n,string l,string i, string a,string c,string h,string fd,string bd,bool e)
         {
             Company_ID = coi;
             Card_ID = cai;
