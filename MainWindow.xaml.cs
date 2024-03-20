@@ -21,6 +21,7 @@ using MySql.Data.MySqlClient;
 using System.Windows.Media.Effects;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Collections;
 
 namespace MQTT
 {
@@ -212,7 +213,41 @@ namespace MQTT
 
         private void srhbtn_Click1(object sender, RoutedEventArgs e)
         {
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            comdatagrid.ItemsSource = null;
+            companies.Clear();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                    // 在這裡執行資料庫操作
+                string sql = $"SELECT * FROM company_info_db WHERE 1=1";
+                if (!string.IsNullOrWhiteSpace(txtname.Text))
+                    sql += $" AND Name LIKE N'%{txtname.Text}%'";
 
+                if (!(txtcid1.SelectedIndex == 0))
+                    sql += $" AND ID = '{companiesID[txtcid1.SelectedIndex]}'";
+
+                if (!string.IsNullOrWhiteSpace(txtphone.Text))
+                    sql += $" AND Cellphone LIKE '%{txtphone.Text}%'";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            companies.Add(new Company(reader.GetString("ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            comdatagrid.ItemsSource = companies;
         }
 
         private void delbtn_Click1(object sender, RoutedEventArgs e)
@@ -306,53 +341,26 @@ namespace MQTT
             string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
             machdatagrid.ItemsSource = null;
             machines.Clear();
-
-            if (txtcid2.SelectedIndex==0)
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                if (txtmid.Text.Length>0)
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                    // 在這裡執行資料庫操作
+                string sql = $"SELECT * FROM machine_db WHERE 1=1";
+                if (!string.IsNullOrWhiteSpace(txtmid.Text))
+                    sql += $" AND Machine_ID = '{txtmid.Text}'";
+                if (!(txtcid2.SelectedIndex==0))
+                    sql += $" AND Company_ID = '{companiesID[txtcid2.SelectedIndex]}'";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                 {
-                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                                            // 在這裡執行資料庫操作
-                        string sql = $"SELECT * FROM machine_db WHERE Machine_ID = '{txtmid.Text}'";
-                        using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                        while (reader.Read())
                         {
-                            using (MySqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                while (reader.Read())
-                                {
-                                    machines.Add(new Machine(reader.GetString("Company_ID"), reader.GetString("Machine_ID"), reader.GetString("Machine_Location"), reader.GetString("Status"), reader.GetBoolean("Effect")));
-                                }
-                            }
-                        }
-                        connection.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("您未輸入任何查詢值");
-                }
-            }
-            else
-            {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                                        // 在這裡執行資料庫操作
-                    string sql = $"SELECT * FROM machine_db WHERE Company_ID = '{companiesID[txtcid2.SelectedIndex]}'";
-                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                machines.Add(new Machine(reader.GetString("Company_ID"), reader.GetString("Machine_ID"), reader.GetString("Machine_Location"), reader.GetString("Status"), reader.GetBoolean("Effect")));
-                            }
+                            machines.Add(new Machine(reader.GetString("Company_ID"), reader.GetString("Machine_ID"), reader.GetString("Machine_Location"), reader.GetString("Status"), reader.GetBoolean("Effect")));
                         }
                     }
-                    connection.Close();
                 }
+                connection.Close();
             }
             machdatagrid.ItemsSource = machines;
         }
@@ -441,7 +449,50 @@ namespace MQTT
 
         private void srhbtn_Click3(object sender, RoutedEventArgs e)
         {
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            memdatagrid.ItemsSource = null;
+            members.Clear();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                    // 在這裡執行資料庫操作
+                string sql = $"SELECT * FROM member_db WHERE 1=1";
+                if (!string.IsNullOrWhiteSpace(txtname2.Text))
+                    sql += $" AND Name LIKE N'%{txtname2.Text}%'";
 
+                if (!(txtcid3.SelectedIndex == 0))
+                    sql += $" AND Company_ID = '{companiesID[txtcid3.SelectedIndex]}'";
+
+                if (!string.IsNullOrWhiteSpace(txtphone2.Text))
+                    sql += $" AND Homephone LIKE '%{txtphone2.Text}%'";
+
+                if (!string.IsNullOrWhiteSpace(txtphone3.Text))
+                    sql += $" AND Cellphone LIKE '%{txtphone3.Text}%'";
+
+                if (!string.IsNullOrWhiteSpace(txtmid2.Text))
+                    sql += $" AND Member_ID = '{txtmid2.Text}'";
+
+                if (!string.IsNullOrWhiteSpace(txtcarid.Text))
+                    sql += $" AND Card_ID = '{txtcarid.Text}'";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            members.Add(new Member(reader.GetString("Company_ID"), reader.GetString("Card_ID"), reader.GetString("Member_ID"), reader.GetString("Name"), reader.GetString("Level"), reader.GetString("ID"), reader.GetString("Address"), reader.GetString("Cellphone"), reader.GetString("Homephone"), reader.GetString("First_Day"), reader.GetString("Birth_Day"), reader.GetBoolean("Effect")));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            memdatagrid.ItemsSource = members;
         }
 
         private void delbtn_Click3(object sender, RoutedEventArgs e)
@@ -510,12 +561,6 @@ namespace MQTT
         {
             comdatagrid.UnselectAll();
         }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void qitbtn2_Click(object sender, RoutedEventArgs e)
         {
             machdatagrid.UnselectAll();
@@ -524,6 +569,10 @@ namespace MQTT
         private void qitbtn3_Click(object sender, RoutedEventArgs e)
         {
             memdatagrid.UnselectAll();
+        }
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

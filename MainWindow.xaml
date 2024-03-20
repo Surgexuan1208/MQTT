@@ -74,7 +74,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addbtn" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click1"/>
                         <Button x:Name="chgbtn" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click1"/>
-                        <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
+                        <Button x:Name="srhbtn" Grid.Column="2" Content="查詢(Search)" FontSize="35" Height="55" Click="srhbtn_Click1"/>
                         <Button x:Name="delbtn" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click1"/>
                         <Button x:Name="qitbtn" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn_Click1"/>
                     </Grid>
@@ -119,7 +119,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addbtn2" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click2"/>
                         <Button x:Name="chgbtn2" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click2"/>
-                        <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click2"/>
+                        <Button x:Name="srhbtn2" Grid.Column="2" Content="查詢(Search)" FontSize="35" Height="55" Click="srhbtn_Click2"/>
                         <Button x:Name="delbtn2" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click2"/>
                         <Button x:Name="qitbtn2" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn2_Click"/>
                     </Grid>
@@ -186,7 +186,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addbtn3" Grid.Column="0" Content="新增(Add)" FontSize="35" Height="55" Click="addbtn_Click3"/>
                         <Button x:Name="chgbtn3" Grid.Column="1" Content="修改(Change)" FontSize="35" Height="55" Click="chgbtn_Click3"/>
-                        <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Sereach)" FontSize="35" Height="55" Click="srhbtn_Click3"/>
+                        <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Search)" FontSize="35" Height="55" Click="srhbtn_Click3"/>
                         <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click3"/>
                         <Button x:Name="qitbtn3" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn3_Click"/>
                     </Grid>
