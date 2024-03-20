@@ -22,6 +22,7 @@ using System.Windows.Media.Effects;
 using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Collections;
+using System.Data;
 
 namespace MQTT
 {
@@ -34,12 +35,41 @@ namespace MQTT
         {
             InitializeComponent();
             SetDataGridTextSize(comdatagrid, 40);
-            SetDataGridTextSize(machdatagrid,40);
+            SetDataGridTextSize(machdatagrid, 40);
             SetDataGridTextSize(memdatagrid, 40);
             this.WindowState = WindowState.Maximized;
             MySQLCreatelist();
         }
-
+        Dictionary<string, string> ComcolumnMapping = new Dictionary<string, string>()
+        {
+            { "Company_ID", "部門編號" },
+            { "Name", "部門名稱" },
+            { "Address", "部門地址" },
+            { "Cellphone", "部門電話" }
+        };
+        Dictionary<string, string> MachcolumnMapping = new Dictionary<string, string>()
+        {
+            { "Company_ID", "部門編號" },
+            { "Machine_ID", "機器編號" },
+            { "Machine_Location", "機器位置" },
+            { "Status", "機器狀態" },
+            { "Effect", "是否啟用" }
+        };
+        Dictionary<string, string> MemcolumnMapping = new Dictionary<string, string>()
+        {
+            { "Company_ID", "部門編號" },
+            { "Card_ID", "卡片編號" },
+            { "Member_ID", "員工編號" },
+            { "Name", "姓名" },
+            { "Level", "職位" },
+            { "ID", "身分證號" },
+            { "Address", "住家地址" },
+            { "Cellphone", "手機號碼" },
+            { "Homephone", "室內電話" },
+            { "FirstDay", "入值日" },
+            { "BirthDay", "生日" },
+            { "Effect", "是否在職" }
+        };
         List<Member> members = new List<Member>();
         List<Machine> machines = new List<Machine>();
         List<Company> companies = new List<Company>();
@@ -124,6 +154,49 @@ namespace MQTT
                 connection.Close();
             }
             machdatagrid.ItemsSource = machines;
+            comdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+               if (ComcolumnMapping.ContainsKey(e.PropertyName))
+               {
+                   e.Column.Header = ComcolumnMapping[e.PropertyName];
+               }
+            };
+            machdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                if (MachcolumnMapping.ContainsKey(e.PropertyName))
+                {
+                    e.Column.Header = MachcolumnMapping[e.PropertyName];
+                }
+            };
+            memdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                if (MemcolumnMapping.ContainsKey(e.PropertyName))
+                {
+                    e.Column.Header = MemcolumnMapping[e.PropertyName];
+                }
+            };
+            comdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                // 设置 CanUserSort 属性为 false
+                e.Column.CanUserSort = false;
+                e.Column.CanUserResize = false;
+                e.Column.CanUserReorder = false;
+            };
+            machdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                // 设置 CanUserSort 属性为 false
+                e.Column.CanUserSort = false;
+                e.Column.CanUserResize = false;
+                e.Column.CanUserReorder = false;
+            };
+            memdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                // 设置 CanUserSort 属性为 false
+                e.Column.CanUserSort = false;
+                e.Column.CanUserResize = false;
+                e.Column.CanUserReorder = false;
+            };
+
         }
         private void SetDataGridTextSize(DataGrid dataGrid, double fontSize)
         {
@@ -573,6 +646,39 @@ namespace MQTT
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void RadioButton3_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RadioButton2_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RadioButton1_Checked(object sender, RoutedEventArgs e)
+        {
+            /*RadioButton radioButton = sender as RadioButton;
+            comdatagrid.ItemsSource = null;
+            if ()
+            {
+                // 检查选中的 RadioButton 的 Tag 属性
+                switch (radioButton.Tag.ToString())
+                {
+                    case "1":
+                        companies = companies.OrderBy(p => p.Company_ID).ToList();
+                        break;
+                    case "2":
+                        companies = companies.OrderBy(p => p.Name).ToList();
+                        break;
+                    case "3":
+                        companies = companies.OrderBy(p => p.Address).ToList();
+                        break;
+                }
+            }
+            comdatagrid.ItemsSource = companies;*/
         }
     }
 }
