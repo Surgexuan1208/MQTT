@@ -645,7 +645,32 @@ namespace MQTT
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string database = "company_db";
+            string databaseServer = "220.132.141.9";
+            string databasePort = "6833";
+            string databaseUser = "root";
+            string databasePassword = "edys1234";
+            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
+            machdatagrid.ItemsSource = null;
+            machines.Clear();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                                    // 在這裡執行資料庫操作
+                string sql = "SELECT company_info_db.*, machine_db.* " + "FROM company_info_db " + "INNER JOIN machine_db ON company_info_db.ID = machine_db.Company_ID";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            machdatagrid.ItemsSource = machines;
         }
 
         private void RadioButton3_Checked(object sender, RoutedEventArgs e)
