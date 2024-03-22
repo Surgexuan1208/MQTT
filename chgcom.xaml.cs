@@ -51,14 +51,14 @@ namespace MQTT
             {
                 connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
                 // 在這裡執行資料庫操作
-                string sql = $"SELECT * FROM company_info_db WHERE ID = '{ID}'";
+                string sql = $"SELECT * FROM company_info_db WHERE Company_ID = '{ID}'";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                 {
                     using(MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            company.Company_ID = reader.GetString("ID");
+                            company.Company_ID = reader.GetString("Company_ID");
                             company.Address = reader.GetString("Address");
                             company.Name = reader.GetString("Name");
                             company.Cellphone = reader.GetString("Cellphone");
@@ -93,7 +93,7 @@ namespace MQTT
                             {
                                 while (reader.Read())
                                 {
-                                    comID.Add(reader.GetString("ID"));
+                                    comID.Add(reader.GetString("Company_ID"));
                                 }
                             }
                         }
@@ -125,7 +125,7 @@ namespace MQTT
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string updateSql ="UPDATE company_info_db SET Name = @n,Address = @a, Cellphone = @c WHERE ID = @i";
+                        string updateSql = "UPDATE company_info_db SET Name = @n,Address = @a, Cellphone = @c WHERE Company_ID = @i";
                         using (MySqlCommand updateCommand = new MySqlCommand(updateSql, connection))
                         {
                             updateCommand.Parameters.AddWithValue("@n", txtname.Text);
@@ -142,7 +142,7 @@ namespace MQTT
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string deleteSql = "DELETE FROM company_info_db WHERE ID = @i";
+                        string deleteSql = "DELETE FROM company_info_db WHERE Company_ID = @i";
                         using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
                         {
                             deleteCommand.Parameters.AddWithValue("@i",originID);
@@ -153,7 +153,7 @@ namespace MQTT
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string insertSql = "INSERT INTO company_info_db (ID, Name, Address, Cellphone) VALUES (@i, @n, @a ,@c)";
+                        string insertSql = "INSERT INTO company_info_db (Company_ID, Name, Address, Cellphone) VALUES (@i, @n, @a ,@c)";
                         using (MySqlCommand insertCommand = new MySqlCommand(insertSql, connection))
                         {
                             insertCommand.Parameters.AddWithValue("@i", txtid.Text);

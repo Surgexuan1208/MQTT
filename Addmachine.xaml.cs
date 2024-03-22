@@ -51,7 +51,7 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            comID.Add(reader.GetString("ID"));
+                            comID.Add(reader.GetString("Company_ID"));
                         }
                     }
                 }

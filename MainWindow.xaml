@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MQTT" Height="1080" Width="1920">
     <Grid Background="#EEB8B8">
-        <TabControl>
+        <TabControl Grid.RowSpan="2">
             <TabItem Header="連線測試:發送端" FontSize="25">
                 <Grid Background="#FFFF">
                     <Button x:Name="connect" Content="連接及傳送" Margin="45,0,45,65" Click="Button_Click" FontSize="40" Height="176" VerticalAlignment="Bottom"/>
@@ -47,14 +47,14 @@
             </TabItem>
             <TabItem Header="部門資料" FontSize="25">
                 <Grid Background="#FFFF">
-                    <DataGrid x:Name="comdatagrid" Margin="26,28,30,350" IsReadOnly="True" AlternatingRowBackground="Pink">
+                    <DataGrid x:Name="comdatagrid" Margin="28,28,28,350" IsReadOnly="True" AlternatingRowBackground="Pink">
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="FontSize" Value="35"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <StackPanel Margin="26,0,1273,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
+                    <StackPanel Margin="28,0,1273,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
                         <RadioButton Content="以部門編號排列" GroupName="Options1" Checked="RadioButton1_Checked" Tag="1">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">

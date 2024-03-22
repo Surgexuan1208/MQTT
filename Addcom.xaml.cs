@@ -50,7 +50,7 @@ namespace MQTT
                         {
                             while (reader.Read())
                             {
-                                comID.Add(reader.GetString("ID"));
+                                comID.Add(reader.GetString("Company_ID"));
                             }
                         }
                     }
@@ -74,7 +74,7 @@ namespace MQTT
                 {
                     connection.Open();
                     string insertSql =
-                        "INSERT INTO company_info_db (ID, Name, Address, Cellphone) VALUES (@id, @name, @address, @cellphone)";
+                        "INSERT INTO company_info_db (Company_ID, Name, Address, Cellphone) VALUES (@id, @name, @address, @cellphone)";
                     using (MySqlCommand insertCommand = new MySqlCommand(insertSql, connection))
                     {
                         insertCommand.Parameters.AddWithValue("@id", txtid.Text);

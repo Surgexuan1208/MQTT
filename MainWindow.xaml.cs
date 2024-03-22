@@ -122,7 +122,7 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            companies.Add(new Company(reader.GetString("ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
+                            companies.Add(new Company(reader.GetString("Company_ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
                             companiesID.Add(companies[companies.Count-1].Company_ID);
                         }
                     }
@@ -303,7 +303,7 @@ namespace MQTT
                     sql += $" AND Name LIKE N'%{txtname.Text}%'";
 
                 if (!(txtcid1.SelectedIndex == 0))
-                    sql += $" AND ID = '{companiesID[txtcid1.SelectedIndex]}'";
+                    sql += $" AND Company_ID = '{companiesID[txtcid1.SelectedIndex]}'";
 
                 if (!string.IsNullOrWhiteSpace(txtphone.Text))
                     sql += $" AND Cellphone LIKE '%{txtphone.Text}%'";
@@ -314,7 +314,7 @@ namespace MQTT
                     {
                         while (reader.Read())
                         {
-                            companies.Add(new Company(reader.GetString("ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
+                            companies.Add(new Company(reader.GetString("Company_ID"), reader.GetString("Name"), reader.GetString("Address"), reader.GetString("Cellphone")));
                         }
                     }
                 }
@@ -353,7 +353,7 @@ namespace MQTT
                             using (MySqlConnection connection = new MySqlConnection(connectionString))
                             {
                                 connection.Open();
-                                string deleteSql ="DELETE FROM company_info_db WHERE ID = @i";
+                                string deleteSql = "DELETE FROM company_info_db WHERE Company_ID = @i";
                                 using (MySqlCommand deleteCommand = new MySqlCommand(deleteSql, connection))
                                 {
                                     deleteCommand.Parameters.AddWithValue("@i", companies[comdatagrid.SelectedIndex].Company_ID);
