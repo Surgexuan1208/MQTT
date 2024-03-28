@@ -28,8 +28,8 @@
                 <Grid Background="#FFFF">
                     <Label Content="IP:" HorizontalAlignment="Left" Margin="40,99,0,0" VerticalAlignment="Top" FontSize="35" Height="65" Width="60"/>
                     <TextBox x:Name="ip2" HorizontalAlignment="Left" Margin="100,105,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="300" Height="65" FontSize="35"/>
-                    <TextBox x:Name="port2" HorizontalAlignment="Left" Margin="100,215,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="162" Height="65" FontSize="35"/>
-                    <Label Content="埠:" HorizontalAlignment="Left" Margin="40,215,0,0" VerticalAlignment="Top" FontSize="35" Height="65" Width="60"/>
+                    <TextBox x:Name="port2" HorizontalAlignment="Left" Margin="100,205,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="162" Height="65" FontSize="35"/>
+                    <Label Content="埠:" HorizontalAlignment="Left" Margin="40,205,0,0" VerticalAlignment="Top" FontSize="35" Height="65" Width="60"/>
                     <TextBox x:Name="ClientID2" Margin="630,105,30,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="65" FontSize="35" Text=""/>
                     <Label Content="  Client  ID:" HorizontalAlignment="Left" Margin="420,105,0,0" VerticalAlignment="Top" FontSize="35" Width="200" Height="65"/>
                     <Grid Margin="40,0,31,0" Height="93" VerticalAlignment="Bottom">
@@ -47,8 +47,8 @@
                     </Border>
                     <Label Content="接收到的的訊息:" HorizontalAlignment="Left" Margin="40,0,0,615" VerticalAlignment="Bottom" FontSize="35" Height="65" Width="320"/>
                     <Label Content="MQTT Subscriber端" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="35" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Label Content="主 題:" HorizontalAlignment="Left" Margin="300,215,0,0" VerticalAlignment="Top" FontSize="35" Width="100" Height="65"/>
-                    <TextBox x:Name="Topic2" Margin="420,215,30,0" TextWrapping="Wrap" Text="forevernew" VerticalAlignment="Top" Height="65" FontSize="35"/>
+                    <Label Content="主 題:" HorizontalAlignment="Left" Margin="300,205,0,0" VerticalAlignment="Top" FontSize="35" Width="100" Height="65"/>
+                    <TextBox x:Name="Topic2" Margin="420,205,30,0" TextWrapping="Wrap" Text="forevernew" VerticalAlignment="Top" Height="65" FontSize="35"/>
                 </Grid>
             </TabItem>
             <TabItem Header="部門資料" FontSize="25">
@@ -291,6 +291,77 @@
                         <Button x:Name="srhbtn3" Grid.Column="2" Content="查詢(Search)" FontSize="35" Height="55" Click="srhbtn_Click3"/>
                         <Button x:Name="delbtn3" Grid.Column="3" Content="刪除(Del)" FontSize="35" Height="55" Click="delbtn_Click3"/>
                         <Button x:Name="qitbtn3" Grid.Column="4" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn3_Click"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="員工逼卡紀錄" FontSize="25">
+                <Grid Background="#FFFF">
+                    <DataGrid x:Name="timedatagrid" Margin="28,28,28,350" IsReadOnly="True">
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="35"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+                    <StackPanel Margin="26,0,1273,309" Orientation="Horizontal" Height="38" VerticalAlignment="Bottom" >
+                        <RadioButton Content="以部門編號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="1">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                        <RadioButton Content="以卡片代號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="2">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                        <RadioButton Content="以員工編號排列" GroupName="Options3" Checked="RadioButton3_Checked" Tag="3">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                    </StackPanel>
+                    <Grid Background="#FFDAD9D9" Margin="28,0,28,78" Height="233" VerticalAlignment="Bottom">
+                        <Grid Margin="28,12,28,0"  VerticalAlignment="Top" Height="123">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="2" Content=" 員     工     姓     名:" FontSize="35" Height="65" Width="300"/>
+                            <TextBox x:Name="txtname3" Grid.Column="3" FontSize="35" Height="65" Width="400"/>
+                            <Label Grid.Column="0" Content=" 部     門     代     號:" FontSize="35" Height="65" Width="300"/>
+                            <ComboBox x:Name="txtcid4" Grid.Column="1" FontSize="35" Height="65" Width="400" SelectedIndex="0"/>
+                        </Grid>
+                        <Grid Margin="28,116,28,0"  VerticalAlignment="Top" Height="102">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content=" 員     工    代     號 :" FontSize="35" Width="300"/>
+                            <TextBox x:Name="txtmid3" Grid.Column="1" FontSize="35" Width="400" Height="65"/>
+                            <Label Grid.Column="2" Content=" 卡     片     代     號:" FontSize="35" Width="300"/>
+                            <TextBox x:Name="txtcarid2" Grid.Column="3" FontSize="35" Width="400" Height="65"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Background="#FFFF" Margin="28,0,28,8"  VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="srhbtn4" Grid.Column="0" Content="查詢(Search)" FontSize="35" Height="55" Click="srhbtn_Click4"/>
+                        <Button x:Name="qitbtn4" Grid.Column="1" Content="取消選取(Cancel)" FontSize="35" Height="55" Click="qitbtn4_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>

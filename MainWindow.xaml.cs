@@ -74,6 +74,7 @@ namespace MQTT
         List<Machine> machines = new List<Machine>();
         List<Company> companies = new List<Company>();
         List<String> companiesID = new List<String>();
+        List<Record> checktimes = new List<Record>();
         public void MySQLCreatelist()
         {
             machines.Clear();
@@ -153,7 +154,25 @@ namespace MQTT
                 }
                 connection.Close();
             }
-            machdatagrid.ItemsSource = machines;
+            timedatagrid.ItemsSource = machines;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
+                // 在這裡執行資料庫操作
+                string sql = "SELECT m.*, c.* FROM member_db m INNER JOIN checkedtime_db c ON m.Card_ID = c.Card_ID";
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            checktimes.Add(new Record(reader.GetString("Card_ID"), reader.GetString("Machine_ID"), reader.GetString("Company_ID"), reader.GetString("Name"), reader.GetString("Check_time")));
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            timedatagrid.ItemsSource = checktimes;
             comdatagrid.AutoGeneratingColumn += (sender, e) =>
             {
                if (ComcolumnMapping.ContainsKey(e.PropertyName))
@@ -169,6 +188,13 @@ namespace MQTT
                 }
             };
             memdatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                if (MemcolumnMapping.ContainsKey(e.PropertyName))
+                {
+                    e.Column.Header = MemcolumnMapping[e.PropertyName];
+                }
+            };
+            timedatagrid.AutoGeneratingColumn += (sender, e) =>
             {
                 if (MemcolumnMapping.ContainsKey(e.PropertyName))
                 {
@@ -196,7 +222,13 @@ namespace MQTT
                 e.Column.CanUserResize = false;
                 e.Column.CanUserReorder = false;
             };
-
+            timedatagrid.AutoGeneratingColumn += (sender, e) =>
+            {
+                // 设置 CanUserSort 属性为 false
+                e.Column.CanUserSort = false;
+                e.Column.CanUserResize = false;
+                e.Column.CanUserReorder = false;
+            };
         }
         private void SetDataGridTextSize(DataGrid dataGrid, double fontSize)
         {
@@ -645,6 +677,10 @@ namespace MQTT
         }
         private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            ip2.IsEnabled = false;
+            ClientID2.IsEnabled = false;
+            port2.IsEnabled = false;
+            Topic2.IsEnabled = false;
             try
             {
                 // 建立 MQTT 客戶端配置
@@ -664,13 +700,17 @@ namespace MQTT
                 var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "Foo"), cleanSession: true);
                 await client.SubscribeAsync(Topic2.Text, MqttQualityOfService.AtMostOnce); //QoS0
                 MessageBox.Show($"已連線到伺服器");
-                client.MessageStream.Subscribe(msg =>
+                client.MessageStream.Subscribe(async msg =>
                 {
                     // 將收到的消息顯示在 UI 中
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        ReceivedMessagesTextBox.Text+=$"收到來自主機 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n";
-                    });
+                        ReceivedMessagesTextBox.Text+=$"收到來自主機 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}";
+
+                    });                        
+                    if (cancellationTokenSource.IsCancellationRequested) {
+                        await client.DisconnectAsync();
+                    }
                 });
             }
             catch (Exception ex)
@@ -742,6 +782,16 @@ namespace MQTT
                     break;
             }
             comdatagrid.ItemsSource = companies;
+        }
+
+        private void srhbtn_Click4(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void qitbtn4_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
