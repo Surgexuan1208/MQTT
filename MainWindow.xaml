@@ -26,23 +26,29 @@
             </TabItem>
             <TabItem Header="連線測試:接收端" FontSize="25">
                 <Grid Background="#FFFF">
-                    <Label Content="IP:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBox x:Name="ip2" HorizontalAlignment="Left" Margin="54,57,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="161" Height="33" FontSize="22"/>
-                    <TextBox x:Name="port2" HorizontalAlignment="Left" Margin="54,100,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="65" Height="32" FontSize="22"/>
-                    <Label Content="埠:" HorizontalAlignment="Left" Margin="20,98,0,0" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBox x:Name="ClientID2" Margin="333,57,31,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" FontSize="22" Text=""/>
-                    <Label Content="ClientID:" HorizontalAlignment="Left" Margin="237,55,0,0" VerticalAlignment="Top" FontSize="22" Width="97"/>
-                    <Button x:Name="stopbtn" Content="stop" Click="StopButton_Click" FontSize="22" IsEnabled="False" Margin="0,351,30,0" Height="35" VerticalAlignment="Top" HorizontalAlignment="Right" Width="285"/>
-                    <Button x:Name="startbtn" Content="start" Margin="30,351,0,0" Click="StartButton_Click" FontSize="22"  Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Width="285"/>
-                    <Border Margin="31,159,31,0" Height="186" VerticalAlignment="Top">
-                        <ScrollViewer VerticalScrollBarVisibility="Visible" Margin="0,12,0,0">
+                    <Label Content="IP:" HorizontalAlignment="Left" Margin="40,99,0,0" VerticalAlignment="Top" FontSize="35" Height="65" Width="60"/>
+                    <TextBox x:Name="ip2" HorizontalAlignment="Left" Margin="100,105,0,0" TextWrapping="Wrap" Text="220.132.141.9" VerticalAlignment="Top" Width="300" Height="65" FontSize="35"/>
+                    <TextBox x:Name="port2" HorizontalAlignment="Left" Margin="100,215,0,0" TextWrapping="Wrap" Text="1999" VerticalAlignment="Top" Width="162" Height="65" FontSize="35"/>
+                    <Label Content="埠:" HorizontalAlignment="Left" Margin="40,215,0,0" VerticalAlignment="Top" FontSize="35" Height="65" Width="60"/>
+                    <TextBox x:Name="ClientID2" Margin="630,105,30,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="65" FontSize="35" Text=""/>
+                    <Label Content="  Client  ID:" HorizontalAlignment="Left" Margin="420,105,0,0" VerticalAlignment="Top" FontSize="35" Width="200" Height="65"/>
+                    <Grid Margin="40,0,31,0" Height="93" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="stopbtn"  Grid.Column="1" Content="stop" Click="StopButton_Click" FontSize="35" IsEnabled="False" Height="65"/>
+                        <Button x:Name="startbtn"  Grid.Column="0" Content="start" Click="StartButton_Click" FontSize="35"  Height="65"/>
+                    </Grid>
+                    <Border Margin="40,0,31,98" Height="523" VerticalAlignment="Bottom">
+                        <ScrollViewer VerticalScrollBarVisibility="Visible">
                             <TextBox x:Name="ReceivedMessagesTextBox" IsReadOnly="True" TextWrapping="Wrap" Background="#FFFFE1B5"/>
                         </ScrollViewer>
                     </Border>
-                    <Label Content="接收到的的訊息:" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Label Content="MQTT Subscriber端" HorizontalAlignment="Left" Margin="22,17,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Label Content="主題:" HorizontalAlignment="Left" Margin="237,98,0,0" VerticalAlignment="Top" FontSize="22" Width="57" RenderTransformOrigin="-2.691,-2.46"/>
-                    <TextBox x:Name="Topic2" Margin="293,100,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" FontSize="22" RenderTransformOrigin="0.5,0.5"/>
+                    <Label Content="接收到的的訊息:" HorizontalAlignment="Left" Margin="40,0,0,615" VerticalAlignment="Bottom" FontSize="35" Height="65" Width="320"/>
+                    <Label Content="MQTT Subscriber端" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="35" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Label Content="主 題:" HorizontalAlignment="Left" Margin="300,215,0,0" VerticalAlignment="Top" FontSize="35" Width="100" Height="65"/>
+                    <TextBox x:Name="Topic2" Margin="420,215,30,0" TextWrapping="Wrap" Text="forevernew" VerticalAlignment="Top" Height="65" FontSize="35"/>
                 </Grid>
             </TabItem>
             <TabItem Header="部門資料" FontSize="25">

@@ -260,7 +260,7 @@ namespace MQTT
             var client = await MqttClient.CreateAsync((string)ip2.Text, configuration);
             // 連接到 MQTT 伺服器
             var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "debugger"), cleanSession: true);
-            var message1 = new MqttApplicationMessage(Topic2.Text, Encoding.UTF8.GetBytes("Stop"));
+            var message1 = new MqttApplicationMessage(Topic2.Text, Encoding.UTF8.GetBytes("@Stop"));
             await client.PublishAsync(message1, MqttQualityOfService.AtMostOnce); //QoS0
             startbtn.IsEnabled = true;
             ip2.IsEnabled = true; port2.IsEnabled = true; ClientID2.IsEnabled = true; Topic2.IsEnabled = true;
@@ -643,34 +643,42 @@ namespace MQTT
         {
             memdatagrid.UnselectAll();
         }
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            string database = "company_db";
-            string databaseServer = "220.132.141.9";
-            string databasePort = "6833";
-            string databaseUser = "root";
-            string databasePassword = "edys1234";
-            string connectionString = $"server={databaseServer};" + $"port={databasePort};" + $"user={databaseUser};" + $"password={databasePassword};" + $"database={database};" + "charset=utf8;";
-            machdatagrid.ItemsSource = null;
-            machines.Clear();
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                connection.Open();  //資料庫連線my'Unable to connect to any of the specified MySQL hosts.''Unable to connect to any of the specified MySQL hosts.'
-                                    // 在這裡執行資料庫操作
-                string sql = "SELECT company_info_db.*, machine_db.* " + "FROM company_info_db " + "INNER JOIN machine_db ON company_info_db.ID = machine_db.Company_ID";
-                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                // 建立 MQTT 客戶端配置
+                var configuration = new MqttConfiguration
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    BufferSize = 65536,
+                    Port = int.Parse(port2.Text),
+                    KeepAliveSecs = 10,
+                    WaitTimeoutSecs = 2,
+                    MaximumQualityOfService = MqttQualityOfService.AtMostOnce,
+                    AllowWildcardsInTopicFilters = true
+                };
+                // 建立 MQTT 客戶端
+                MessageBox.Show($"正在監聽: {Topic2.Text} 主題");
+                var client = await MqttClient.CreateAsync((string)ip2.Text, configuration);
+                // 連接到 MQTT 伺服器
+                var sessionState = await client.ConnectAsync(new MqttClientCredentials(clientId: "Foo"), cleanSession: true);
+                await client.SubscribeAsync(Topic2.Text, MqttQualityOfService.AtMostOnce); //QoS0
+                MessageBox.Show($"已連線到伺服器");
+                client.MessageStream.Subscribe(msg =>
+                {
+                    // 將收到的消息顯示在 UI 中
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        while (reader.Read())
-                        {
-                            
-                        }
-                    }
-                }
-                connection.Close();
+                        ReceivedMessagesTextBox.Text+=$"收到來自主機 '{msg.Topic}' 的消息：{Encoding.UTF8.GetString(msg.Payload)}\n";
+                    });
+                });
             }
-            machdatagrid.ItemsSource = machines;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"錯誤：{ex.Message}");
+            }
+            startbtn.IsEnabled = false;
+            stopbtn.IsEnabled = true;
         }
 
         private void RadioButton3_Checked(object sender, RoutedEventArgs e)
